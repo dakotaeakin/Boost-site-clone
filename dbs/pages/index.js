@@ -6,7 +6,7 @@ import umbrella from "../public/umbrella.svg";
 import { useRouter } from "next/router";
 import { UserContext } from "../lib/context";
 
-const index = () => {
+const Index = () => {
   const context = useContext(UserContext);
   const router = useRouter();
 
@@ -29,4 +29,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;
