@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { db } from "../firebase/initFirebase";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -23,4 +23,11 @@ export async function getAllUserData() {
   }
   return users;
 }
-export const UserContext = createContext({ user: null, username: null });
+
+export async function updateUser(dict, uid) {
+  await setDoc(doc(db, "users", uid), {
+    firstName: dict.firstName,
+    lastName: dict.lastName,
+    email: dict.email,
+  });
+}

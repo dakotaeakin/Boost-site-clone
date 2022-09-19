@@ -8,5 +8,6 @@ import { faCode, faHighlighter } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faCode,
   faHighlighter
+
   // more icons go here
 );

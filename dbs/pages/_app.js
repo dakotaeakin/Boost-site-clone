@@ -1,18 +1,14 @@
 import { Router, useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { UserContext } from "../lib/firebaseLib";
+import { UserContext } from "../lib/context";
 import { useUserData } from "../lib/hooks";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   const userData = useUserData();
-  const router = useRouter();
-
-  // useEffect(() => {
-  //   router.push("/admin");
-  // }, [userData.user]);
 
   return (
     <UserContext.Provider value={userData}>
@@ -21,7 +17,6 @@ function MyApp({ Component, pageProps }) {
         <div className="flex-grow bg-[#fff]">
           <Component {...pageProps} />
         </div>
-
         <Footer />
       </div>
     </UserContext.Provider>

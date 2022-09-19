@@ -33,66 +33,27 @@ const db = getFirestore(app);
 //storage
 const storage = getStorage();
 const storageRef = ref(storage);
-// const testerVar = db.doc;
 
 var dict = {};
 var tempUsers = [];
 export async function readTests(field) {
   var users = [];
-  const snapshot = collection(db, "Users");
+  const snapshot = collection(db, "users");
 
-  const querySnapshot = await getDocs(collection(db, "Users"));
+  const querySnapshot = await getDocs(collection(db, "users"));
   querySnapshot.forEach((docu) => {
-    // doc.data() is never undefined for query doc snapshots
-    // console.log(doc.id, " => ", doc.data());
-    // console.log(doc.id);
     const docRef = doc(db, "TestUser", "Name");
-    // const docSnap = await getDoc(docRef);
-    // console.log(docu);
     const tempData = docu.data();
     let key = docu.id;
     users.push(docu.data());
-    // users.push(tempData.Name);
-    // console.log(users);
   });
   tempUsers.push(users);
   return users;
 }
 
-async function yeet() {
-  const data = await readTests("Bio");
-  // console.log("yeet", data);
-}
-
-yeet();
-
-// console.log(tempUsers);
-
-const wait = async () => {
-  var users2 = [];
-  // await bio;
-  // // console.log("yeeet", users);
-
-  try {
-    users2.push(users);
-    return await bio;
-  } catch (e) {
-    return "caught";
-  }
-};
-const waitEx = wait().then((val) => {
-  return val;
-});
-const yeetIt = wait();
-
-let users2 = [];
-
-// console.log("initFirebase test2", users2);
-export { waitEx };
-export { dict };
 export { db };
 export { storageRef };
 
 export const signIn = signInWithEmailAndPassword;
 export const createUser = createUserWithEmailAndPassword;
-export const auth = getAuth();
+export const auth = getAuth(app);

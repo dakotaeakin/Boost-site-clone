@@ -1,23 +1,53 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { auth, createUser, signIn } from "../firebase/initFirebase";
+import { updateUser } from "../lib/firebaseLib";
+import { useRouter } from "next/router";
+import { useUserData } from "../lib/hooks";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { UserContext } from "../lib/context";
 
 const login = () => {
   //Add mobile response
+
+  // const [userGlob] = useAuthState(auth);
+
+  const context = useContext(UserContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    let unsubscribe;
+    // console.log(context);
+    if (context.user) {
+      console.log(context);
+      router.replace("/");
+    }
+  }, [context]);
+
+  // console.log(context);
 
   const [emailTxt, setEmailTxt] = useState();
   const [passTxt, setPassTxt] = useState();
   const [passVerTxt, setPassVerTxt] = useState();
   const [passOk, setPassOk] = useState(false);
   const [createAcctClicked, setCreateAcctClicked] = useState(false);
+  const [user, setUser] = useState({});
 
   //Add error handling
-  const loginEmail = async (email, pass) => {
-    const userCredential = await signIn(auth, email, pass);
+  const loginEmail = async () => {
+    const userCredential = await signIn(auth, emailTxt, passTxt);
+    // console.log(userCredential.user.uid);
+    // router.replace("/about");
   };
 
   //Add error handling
   const createWithEmail = async () => {
     const userCredential = await createUser(auth, emailTxt, passTxt);
+    setUser((prevUser) => ({
+      ...prevUser,
+      uid: userCredential.user.uid,
+    }));
+    // console.log(userCredential.user.uid);
+    updateUser(user, userCredential.user.uid);
   };
 
   var test = false;
@@ -49,6 +79,7 @@ const login = () => {
   return (
     <div className="flex justify-center h-[50vh] items-center">
       <div className="bg-gray-400 min-w-[35%] h-fit rounded-xl">
+        {/* <button onClick={console.log(userGlobal)}>Click Me</button> */}
         {createAcctClicked ? (
           <form className="flex flex-col items-center pt-8 pb-12">
             <div className="w-[70%] flex justify-between">
@@ -62,7 +93,12 @@ const login = () => {
                   type="text"
                   id="First Name"
                   name="First Name"
-                  onChange={(e) => setEmailTxt(e.target.value)}
+                  onChange={(e) =>
+                    setUser((prevUser) => ({
+                      ...prevUser,
+                      firstName: e.target.value,
+                    }))
+                  }
                 />
               </div>
               <div className="flex flex-col w-[49%]">
@@ -75,7 +111,12 @@ const login = () => {
                   type="text"
                   id="LastName"
                   name="LastName"
-                  onChange={(e) => setEmailTxt(e.target.value)}
+                  onChange={(e) =>
+                    setUser((prevUser) => ({
+                      ...prevUser,
+                      lastName: e.target.value,
+                    }))
+                  }
                 />
               </div>
             </div>
@@ -88,7 +129,13 @@ const login = () => {
               type="text"
               id="email"
               name="email"
-              onChange={(e) => setEmailTxt(e.target.value)}
+              onChange={(e) => {
+                setEmailTxt(e.target.value);
+                setUser((prevUser) => ({
+                  ...prevUser,
+                  email: e.target.value,
+                }));
+              }}
             />
             <label className="w-[70%] pt-4 text-left" for="last">
               Password:
@@ -130,7 +177,9 @@ const login = () => {
             <div className="flex justify-between w-[50%]">
               <button
                 className="bg-red-300 w-[45%] h-8 rounded-lg mt-4"
-                onClick={() => updateCreateAcct()}
+                onClick={() => {
+                  updateCreateAcct();
+                }}
               >
                 Cancel
               </button>
@@ -172,7 +221,7 @@ const login = () => {
             <button
               className="bg-red-300 w-[20%] h-8 rounded-lg mt-8"
               type="button"
-              onClick={() => loginEmail(emailTxt, passTxt)}
+              onClick={() => loginEmail()}
             >
               Login
             </button>

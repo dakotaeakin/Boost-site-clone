@@ -1,9 +1,11 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import Image from "next/image";
 import logo from "../public/logo.png";
+import userPic from "../public/user.png";
 import { useRouter } from "next/router";
+import { UserContext } from "../lib/context";
 
 var loggedIn = false;
 
@@ -33,8 +35,9 @@ function classNames(...classes) {
 export default function Navbar() {
   const router = useRouter();
   const path = router.pathname;
+  const context = useContext(UserContext);
 
-  // console.log(path);
+  // console.log(context);
   return (
     <Disclosure as="nav" className="bg-[#f5f5f6]">
       {({ open }) => (
@@ -91,14 +94,12 @@ export default function Navbar() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                >
-                  <span className="sr-only">View notifications</span>
-                  {/* <BellIcon className="h-6 w-6" aria-hidden="true" /> */}
-                </button>
-
+                {context.firstName ? (
+                  <div className="flex items-center">
+                    <div className="pr-4">Hi, {context.firstName}!</div>
+                    <Image src={userPic} width={20} height={20} />
+                  </div>
+                ) : null}
                 {/* Profile dropdown */}
                 <Menu
                   as="div"

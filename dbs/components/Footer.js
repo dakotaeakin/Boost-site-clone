@@ -5,8 +5,8 @@ import "./fontawesome";
 import Link from "next/link";
 import { auth, googleAuthProvider } from "../firebase/initFirebase";
 import { signInWithPopup } from "firebase/auth";
-import { UserContext } from "../lib/firebaseLib";
 import { useRouter } from "next/router";
+import { UserContext } from "../lib/context";
 
 var fb = false;
 
