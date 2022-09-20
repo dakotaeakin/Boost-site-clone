@@ -6,7 +6,7 @@ import { useUserData } from "../lib/hooks";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { UserContext } from "../lib/context";
 
-const login = () => {
+const Login = () => {
   //Add mobile response
 
   // const [userGlob] = useAuthState(auth);
@@ -16,14 +16,10 @@ const login = () => {
 
   useEffect(() => {
     let unsubscribe;
-    // console.log(context);
     if (context.user) {
-      console.log(context);
       router.replace("/");
     }
   }, [context]);
-
-  // console.log(context);
 
   const [emailTxt, setEmailTxt] = useState();
   const [passTxt, setPassTxt] = useState();
@@ -56,7 +52,7 @@ const login = () => {
     test = true;
   };
 
-  //Add better password logic!
+  //Add password regex logic!
   const checkPass = (Txt) => {
     if (passVerTxt != Txt) {
       setPassOk(false);
@@ -239,4 +235,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;
