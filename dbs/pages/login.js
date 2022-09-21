@@ -73,7 +73,7 @@ const Login = () => {
   }
 
   return (
-    <div className="flex justify-center h-[50vh] items-center">
+    <div className="flex justify-center min-h-[60vh] items-center">
       <div className="bg-gray-400 min-w-[35%] h-fit rounded-xl">
         {/* <button onClick={console.log(userGlobal)}>Click Me</button> */}
         {createAcctClicked ? (
@@ -223,10 +223,11 @@ const Login = () => {
             </button>
             <h className="pt-4">Don't have an account? Create one today!</h>
             <button
-              className="bg-red-300 w-[20%] h-8 rounded-lg mt-4"
+              className="bg-red-300 min-w-fit w-[20%] h-8 rounded-lg mt-4"
               onClick={() => updateCreateAcct()}
             >
-              Create account
+              <div className="pl-2 pr-2">Create account</div>
+              
             </button>
           </form>
         )}
