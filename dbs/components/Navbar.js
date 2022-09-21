@@ -6,8 +6,9 @@ import logo from "../public/logo.png";
 import userPic from "../public/user.png";
 import { useRouter } from "next/router";
 import { UserContext } from "../lib/context";
+import { getAuth, signOut } from "firebase/auth";
 
-var loggedIn = true;
+var loggedIn = false;
 
 const navigation = [
   // {
@@ -36,8 +37,13 @@ export default function Navbar() {
   const router = useRouter();
   const path = router.pathname;
   const context = useContext(UserContext);
-
+  const auth = getAuth();
   // console.log(context);
+
+  const signUserOut = () => {
+    signOut(auth);
+  };
+
   return (
     <Disclosure as="nav" className="bg-[#f5f5f6]">
       {({ open }) => (
@@ -96,8 +102,16 @@ export default function Navbar() {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {context.firstName ? (
                   <div className="flex items-center">
+                    <div className="pr-2">
+                      <button
+                        className="bg-red-300 p-2 rounded-xl hover:bg-red-400"
+                        onClick={signUserOut}
+                      >
+                        Sign Out
+                      </button>
+                    </div>
                     <div className="pr-4">Hi, {context.firstName}!</div>
-                      <Image src={userPic} width={20} height={20} />
+                    <Image src={userPic} width={20} height={20} />
                   </div>
                 ) : null}
                 {/* Profile dropdown */}
