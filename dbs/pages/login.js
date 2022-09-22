@@ -190,7 +190,7 @@ const Login = () => {
             </div>
           </form>
         ) : (
-          <form className="flex flex-col items-center pt-8 pb-12">
+          <form className="flex flex-col items-center pt-8 pb-12" method="post">
             <label className="w-[70%] pt-4 text-left" for="first">
               Email:
             </label>
