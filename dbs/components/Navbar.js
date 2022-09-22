@@ -80,18 +80,20 @@ export default function Navbar() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <div className="flex items-center">
-                  <div className="pr-2">
-                    <button
-                      className="bg-[#f25d12] p-2 rounded-xl hover:shadow-lg hover:bg-[#F24712]"
-                      onClick={signUserOut}
-                    >
-                      <div className="pl-2 pr-2 text-white ">Sign Out</div>
-                    </button>
+                {context.user ? (
+                  <div className="flex items-center">
+                    <div className="pr-2">
+                      <button
+                        className="bg-[#f25d12] p-2 rounded-xl hover:shadow-lg hover:bg-[#F24712]"
+                        onClick={signUserOut}
+                      >
+                        <div className="pl-2 pr-2 text-white ">Sign Out</div>
+                      </button>
+                    </div>
+                    <div className="pr-4">Hi, {context.firstName}!</div>
+                    <Image src={userPic} width={20} height={20} />
                   </div>
-                  <div className="pr-4">Hi, {context.firstName}!</div>
-                  <Image src={userPic} width={20} height={20} />
-                </div>
+                ) : null}
                 {/* Profile dropdown */}
               </div>
             </div>
