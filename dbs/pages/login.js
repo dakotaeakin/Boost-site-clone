@@ -79,6 +79,7 @@ const Login = () => {
             className="flex flex-col items-center pt-8 pb-12"
             name="Create Account"
             method="post"
+            netlify
           >
             <div className="w-[70%] flex justify-between">
               <div className="flex flex-col w-[49%]">
@@ -198,6 +199,7 @@ const Login = () => {
             className="flex flex-col items-center pt-8 pb-12"
             name="Create Account"
             method="post"
+            netlify
           >
             <label className="w-[70%] pt-4 text-left" for="first">
               Email:
