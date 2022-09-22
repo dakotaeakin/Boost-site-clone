@@ -79,7 +79,6 @@ const Login = () => {
             className="flex flex-col items-center pt-8 pb-12"
             name="Create Account"
             method="post"
-            onSubmit="return false"
           >
             <div className="w-[70%] flex justify-between">
               <div className="flex flex-col w-[49%]">
@@ -199,7 +198,7 @@ const Login = () => {
             className="flex flex-col items-center pt-8 pb-12"
             name="Create Account"
             method="post"
-            onSubmit="return false"
+            // onSubmit={loginEmail}
           >
             <label className="w-[70%] pt-4 text-left" for="first">
               Email:
@@ -222,11 +221,12 @@ const Login = () => {
               id="password"
               name="password"
               onChange={(e) => setPassTxt(e.target.value)}
+              onKeyPress={(e) => (e.key === "Enter" ? loginEmail() : null)}
             />
             <button
               className="bg-[#f25d12] w-[20%] h-12 rounded-lg mt-8 hover:shadow-lg hover:bg-[#F24712]"
-              type="submit"
-              onClick={() => loginEmail()}
+              type="button"
+              onClick={loginEmail}
             >
               <div className="pl-2 pr-2 text-white font-bold">Login</div>
             </button>
