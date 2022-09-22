@@ -14,10 +14,10 @@ function MyApp({ Component, pageProps }) {
     <UserContext.Provider value={userData}>
       <div className="flex flex-col justify-start min-h-screen">
         <Navbar />
-        <div className="flex-grow bg-[#fff]">
+        <div className="flex-grow bg-[#f1f1f1] z-0">
           <Component {...pageProps} />
         </div>
-        <Footer />
+        <Footer className="" />
       </div>
     </UserContext.Provider>
   );

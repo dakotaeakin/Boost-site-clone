@@ -45,34 +45,14 @@ export default function Navbar() {
   };
 
   return (
-    <Disclosure as="nav" className="bg-[#f5f5f6]">
+    <Disclosure as="nav" className="bg-[#f1f1f1] shadow-md z-10">
       {({ open }) => (
         <>
-          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-            <div className="relative flex items-center justify-between h-16">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <XIcon className="block h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <MenuIcon className="block h-6 w-6" aria-hidden="true" />
-                  )}
-                </Disclosure.Button>
-              </div>
-              <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex-shrink-0 flex items-center">
-                  <div className="hidden md:flex items-center pr-2 max-w-16">
-                    <Image
-                      alt="logo"
-                      src={logo}
-                      // layout="responsive"
-                      width={40}
-                      height={40}
-                    />
-                  </div>
-                  <h1 className="text-xl font-bold text-gray-300">
+          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 ">
+            <div className="relative flex items-center justify-between h-16 ">
+              <div className="flex-1 flex items-center justify-center t">
+                <div className=" flex-shrink-0 flex items-center absolute left">
+                  <h1 className="text-xl font-bold text-black-300">
                     Best Mobile
                   </h1>
                 </div>
@@ -104,10 +84,10 @@ export default function Navbar() {
                   <div className="flex items-center">
                     <div className="pr-2">
                       <button
-                        className="bg-red-300 p-2 rounded-xl hover:bg-red-400"
+                        className="bg-[#f25d12] p-2 rounded-xl hover:shadow-lg hover:bg-[#F24712]"
                         onClick={signUserOut}
                       >
-                        Sign Out
+                        <div className="pl-2 pr-2 text-white ">Sign Out</div>
                       </button>
                     </div>
                     <div className="pr-4">Hi, {context.firstName}!</div>

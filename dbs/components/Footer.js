@@ -16,16 +16,10 @@ const Footer = () => {
 
   return (
     <>
-      <div className="bg-[#f5f5f6]  bottom-0 h-32 min-w-full">
+      <div className="bg-[#f1f1f1] shadow-inner bottom-0 h-32 min-w-full z-10">
         <div className="h-32 flex items-center max-w-7xl justify-center lg:justify-between mx-auto px-2 sm:px-6 lg:px-8">
           <div className="flex flex-col text-sm font-medium text-gray-300">
             © Best Mobile
-          </div>
-          <div className={fb ? "" : "hidden"}>
-            <FontAwesomeIcon
-              className="fill-current text-gray-300"
-              icon={faFacebook}
-            />
           </div>
         </div>
       </div>

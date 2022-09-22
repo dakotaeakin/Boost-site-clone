@@ -19,10 +19,9 @@ const Index = () => {
 
   return (
     <>
-      <div className="flex flex-col justify-between h-full bg-[#fff]">
+      <div className="flex flex-col justify-between h-full bg-[#f1f1f1]">
         <div className="max-w-7xl pt-8 h-full mx-auto px-2 sm:px-6 lg:px-8 flex flex-col items-center md:items-start md:flex-row md:justify-between">
-          <div className="bg-gray-800 sm:max-w-[50%] px-4 py-[15%]"></div>
-          <div className="bg-gray-600"></div>
+          Coming soon!
         </div>
       </div>
     </>

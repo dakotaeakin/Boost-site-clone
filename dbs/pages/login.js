@@ -15,7 +15,6 @@ const Login = () => {
   const router = useRouter();
 
   useEffect(() => {
-    let unsubscribe;
     if (context.user) {
       router.replace("/");
     }
@@ -74,8 +73,7 @@ const Login = () => {
 
   return (
     <div className="flex justify-center min-h-[60vh] items-center">
-      <div className="bg-gray-400 min-w-[35%] h-fit rounded-xl">
-        {/* <button onClick={console.log(userGlobal)}>Click Me</button> */}
+      <div className=" min-w-[35%] h-fit rounded-xl">
         {createAcctClicked ? (
           <form className="flex flex-col items-center pt-8 pb-12">
             <div className="w-[70%] flex justify-between">
@@ -84,7 +82,7 @@ const Login = () => {
                   First Name:
                 </label>
                 <input
-                  className="w-full rounded-lg h-8"
+                  className="w-full rounded-lg h-8 shadow-lg"
                   required
                   type="text"
                   id="First Name"
@@ -102,7 +100,7 @@ const Login = () => {
                   Last Name:
                 </label>
                 <input
-                  className="w-full rounded-lg h-8"
+                  className="w-full rounded-lg h-8 shadow-lg"
                   required
                   type="text"
                   id="LastName"
@@ -120,7 +118,7 @@ const Login = () => {
               Email:
             </label>
             <input
-              className="w-[70%] rounded-lg h-8"
+              className="w-[70%] rounded-lg h-8 shadow-lg"
               required
               type="text"
               id="email"
@@ -137,7 +135,7 @@ const Login = () => {
               Password:
             </label>
             <input
-              className="w-[70%] rounded-lg h-8"
+              className="w-[70%] rounded-lg h-8 shadow-lg"
               required
               type="password"
               id="password"
@@ -152,7 +150,7 @@ const Login = () => {
             </label>
             <input
               className={classNames(
-                "w-[70%] rounded-lg h-8",
+                "w-[70%] rounded-lg h-8 shadow-lg",
                 passTxt !== undefined
                   ? passTxt.length > 0
                     ? passOk
@@ -172,21 +170,22 @@ const Login = () => {
             />
             <div className="flex justify-between w-[50%]">
               <button
-                className="bg-red-300 w-[45%] h-8 rounded-lg mt-4"
+                type="button"
+                className="bg-[#f25d12] w-[45%] h-12 rounded-lg mt-4 hover:shadow-lg hover:bg-[#F24712]"
                 onClick={() => {
                   updateCreateAcct();
                 }}
               >
-                Cancel
+                <div className="pl-2 pr-2 text-white font-bold">Cancel</div>
               </button>
               <button
-                type="button"
-                className="bg-red-300 w-[45%] h-8 rounded-lg mt-4"
+                type="submit"
+                className="bg-[#f25d12] w-[45%] h-12 rounded-lg mt-4 hover:shadow-lg hover:bg-[#F24712]"
                 onClick={() => {
                   createWithEmail();
                 }}
               >
-                Submit
+                <div className="pl-2 pr-2 text-white font-bold">Submit</div>
               </button>
             </div>
           </form>
@@ -196,7 +195,7 @@ const Login = () => {
               Email:
             </label>
             <input
-              className="w-[70%] rounded-lg h-8"
+              className="w-[70%] rounded-lg h-8 shadow-lg"
               required
               type="text"
               id="email"
@@ -207,7 +206,7 @@ const Login = () => {
               Password:
             </label>
             <input
-              className="w-[70%] rounded-lg h-8"
+              className="w-[70%] rounded-lg h-8 shadow-lg"
               required
               type="password"
               id="password"
@@ -215,19 +214,21 @@ const Login = () => {
               onChange={(e) => setPassTxt(e.target.value)}
             />
             <button
-              className="bg-red-300 w-[20%] h-8 rounded-lg mt-8"
-              type="button"
+              className="bg-[#f25d12] w-[20%] h-12 rounded-lg mt-8 hover:shadow-lg hover:bg-[#F24712]"
+              type="submit"
               onClick={() => loginEmail()}
             >
-              Login
+              <div className="pl-2 pr-2 text-white font-bold">Login</div>
             </button>
             <h className="pt-4">Don't have an account? Create one today!</h>
             <button
-              className="bg-red-300 min-w-fit w-[20%] h-8 rounded-lg mt-4"
+              type="button"
+              className="bg-[#f25d12] min-w-fit w-[20%] h-12 rounded-lg mt-4 hover:shadow-lg hover:bg-[#F24712]"
               onClick={() => updateCreateAcct()}
             >
-              <div className="pl-2 pr-2">Create account</div>
-              
+              <div className="pl-2 pr-2 text-white font-bold">
+                Create account
+              </div>
             </button>
           </form>
         )}
