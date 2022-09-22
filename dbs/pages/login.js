@@ -75,7 +75,11 @@ const Login = () => {
     <div className="flex justify-center min-h-[60vh] items-center">
       <div className=" min-w-[35%] h-fit rounded-xl">
         {createAcctClicked ? (
-          <form className="flex flex-col items-center pt-8 pb-12" method="post">
+          <form
+            className="flex flex-col items-center pt-8 pb-12"
+            name="Create Account"
+            method="post"
+          >
             <div className="w-[70%] flex justify-between">
               <div className="flex flex-col w-[49%]">
                 <label className="w-[50%] pt-4 text-left" for="first">
@@ -190,7 +194,11 @@ const Login = () => {
             </div>
           </form>
         ) : (
-          <form className="flex flex-col items-center pt-8 pb-12" method="post">
+          <form
+            className="flex flex-col items-center pt-8 pb-12"
+            name="Create Account"
+            method="post"
+          >
             <label className="w-[70%] pt-4 text-left" for="first">
               Email:
             </label>
