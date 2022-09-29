@@ -45,41 +45,20 @@ export default function Navbar() {
   };
 
   return (
-    <Disclosure as="nav" className="bg-[#f1f1f1] shadow-md z-10">
+    <Disclosure
+      as="nav"
+      className="flex justify-center bg-[#f1f1f1] w-full shadow-md z-10"
+    >
       {({ open }) => (
         <>
-          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 ">
-            <div className="relative flex items-center justify-between h-16 ">
-              <div className="flex-1 flex items-center justify-center t">
-                <div className=" flex-shrink-0 flex items-center absolute left">
-                  <h1 className="text-xl font-bold text-black-300">
-                    Best Mobile
-                  </h1>
-                </div>
-                <div className="hidden sm:block sm:ml-6">
-                  <div className="flex space-x-2 md:space-x-4">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        {...(path == item.href
-                          ? (item.current = true)
-                          : (item.current = false))}
-                        className={classNames(
-                          item.current
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "px-3 py-2 rounded-md text-sm font-medium"
-                        )}
-                        aria-current={item.current ? "page" : undefined}
-                      >
-                        {item.name}
-                      </a>
-                    ))}
-                  </div>
-                </div>
+          <div className="flex justify-center max-w-7xl w-full pl-8 pr-8">
+            <div className="flex items-center justify-between w-full h-16 ">
+              <div className="">
+                <h1 className="text-xl font-bold text-black-300">
+                  Best Mobile
+                </h1>
               </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <div className="flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {context.user ? (
                   <div className="flex items-center">
                     <div className="pr-2">
@@ -98,7 +77,6 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-
           <Disclosure.Panel className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
