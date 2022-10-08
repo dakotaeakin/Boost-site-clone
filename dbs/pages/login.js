@@ -26,10 +26,25 @@ const Login = () => {
   const [passOk, setPassOk] = useState(false);
   const [createAcctClicked, setCreateAcctClicked] = useState(false);
   const [user, setUser] = useState({});
+  const [emailError, setEmailError] = useState();
 
+  const errorHandler = (e) => {
+    switch (e.code) {
+      case "auth/missing-email":
+        setEmailError("Please enter a valid email");
+        break;
+    }
+  };
   //Add error handling
   const loginEmail = async () => {
-    const userCredential = await signIn(auth, emailTxt, passTxt);
+    try {
+      const userCredential = await signIn(auth, emailTxt, passTxt);
+    } catch (e) {
+      // alert(JSON.stringify(e));
+      // setEmailError("0");
+      // alert(e.code);
+      errorHandler(e);
+    }
     // console.log(userCredential.user.uid);
     // router.replace("/about");
   };
@@ -204,13 +219,24 @@ const Login = () => {
               Email:
             </label>
             <input
-              className="w-[70%] rounded-lg h-8 shadow-lg"
+              className={classNames(
+                "w-[70%] rounded-lg h-8 shadow-lg",
+                emailError ? "bg-red-400" : ""
+              )}
               required
               type="text"
               id="email"
               name="email"
               onChange={(e) => setEmailTxt(e.target.value)}
             />
+            <label
+              className={classNames(
+                emailError ? "w-[70%] text-red-400 text-left" : "hidden"
+              )}
+              for="first"
+            >
+              {emailError}
+            </label>
             <label className="w-[70%] pt-4 text-left" for="last">
               Password:
             </label>
