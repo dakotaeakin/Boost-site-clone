@@ -45,10 +45,18 @@ export default function Navbar() {
   return (
     <Disclosure
       as="nav"
-      className="flex justify-center bg-[#f1f1f1] w-full shadow-md z-10"
+      className="flex justify-center bg-[#f1f1f1] w-full shadow-md z-20"
     >
       {({ open }) => (
         <>
+          <div
+            className={classNames(
+              display
+                ? "absolute h-full w-full bg-gray-400 top-0 right-0 bopttom-0 left-0 opacity-50"
+                : "hidden"
+            )}
+            onClick={() => setDisplay(!display)}
+          ></div>
           <div className="flex justify-center max-w-7xl w-full pl-8 pr-8">
             <div className="flex items-center justify-between w-full h-16 ">
               <div className="">

@@ -25,13 +25,13 @@ const Index = () => {
   return (
     <>
       <div className="flex justify-center w-full h-full bg-[#f1f1f1]">
-        <div className="max-w-7xl w-full flex justify-around">
-          <div>
+        <div className="pt-8 max-w-7xl w-full flex justify-around">
+          <div className="pl-8">
             <DashboardSideMenu />
           </div>
-          <div className="flex flex-col space-y-8">
+          <div className="flex flex-col space-y-8 w-full pr-8 pl-8">
             <DashboardHeader />
-            <div className="flex space-x-8">
+            <div className="flex space-x-8 w-full">
               <DashboardDevices />
               <DashboardExtras />
             </div>
