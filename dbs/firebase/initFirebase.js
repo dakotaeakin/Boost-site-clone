@@ -34,23 +34,6 @@ const db = getFirestore(app);
 const storage = getStorage();
 const storageRef = ref(storage);
 
-var dict = {};
-var tempUsers = [];
-export async function readTests(field) {
-  var users = [];
-  const snapshot = collection(db, "users");
-
-  const querySnapshot = await getDocs(collection(db, "users"));
-  querySnapshot.forEach((docu) => {
-    const docRef = doc(db, "TestUser", "Name");
-    const tempData = docu.data();
-    let key = docu.id;
-    users.push(docu.data());
-  });
-  tempUsers.push(users);
-  return users;
-}
-
 export { db };
 export { storageRef };
 
