@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { auth, createUser, signIn } from "../../lib/firebase";
 import { updateUser } from "../../lib/firebase";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { useUserData } from "../../lib/hooks";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { UserContext } from "../../lib/context";
@@ -24,6 +24,14 @@ import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined
 import Link from "next/link";
 
 const Login = () => {
+  const context = useContext(UserContext);
+
+  useEffect(() => {
+    if (context.user) {
+      Router.push("/");
+    }
+  }, [context]);
+
   const [serverError, setServerError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 

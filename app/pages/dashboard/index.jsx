@@ -6,4 +6,4 @@ const Dashboard = () => {
 
 export default Dashboard;
 
-contact.requireAuth = true; //Require user to be logged in to view this page.
+Dashboard.requireAuth = true; //Require user to be logged in to view this page.
