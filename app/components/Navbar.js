@@ -9,6 +9,7 @@ import { UserContext } from "../lib/context";
 import { getAuth, signOut } from "firebase/auth";
 import Dropdown from "./Dropdown";
 import { classNames } from "../lib/hooks";
+import { Typography } from "@mui/material";
 
 var loggedIn = false;
 
@@ -60,9 +61,9 @@ export default function Navbar() {
           <div className="flex justify-center max-w-7xl w-full pl-8 pr-8">
             <div className="flex items-center justify-between w-full h-16 ">
               <div className="">
-                <h1 className="text-xl font-bold text-black-300">
+                <Typography variant="h2" className="text-xl font-bold text-black-300">
                   Best Mobile
-                </h1>
+                </Typography>
               </div>
               <div className="flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {context.user ? (

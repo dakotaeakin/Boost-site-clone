@@ -1,11 +1,7 @@
 import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
-import { db } from "../firebase/initFirebase";
-import { getAuth } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { getDocs, getFirestore } from "firebase/firestore";
-import { getStorage, ref } from "firebase/storage";
-import { collection, doc, setDoc } from "firebase/firestore";
+import {  getFirestore } from "firebase/firestore";
 import {
   getAuth,
   createUserWithEmailAndPassword,

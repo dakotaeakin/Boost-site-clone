@@ -1,7 +1,7 @@
 import { doc, getFirestore, onSnapshot } from "firebase/firestore";
 import { useContext, useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../firebase/initFirebase";
+import { auth } from "./firebase";
 import { UserContext } from "./context";
 
 // Custom hook to read  auth record and user profile doc
