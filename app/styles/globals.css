@@ -15,9 +15,6 @@ body,
   
 }
 
-body{
-  /* position: fixed; */
-}
 
 .app {
   display: flex;
