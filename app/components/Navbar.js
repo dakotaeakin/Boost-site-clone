@@ -61,7 +61,7 @@ export default function Navbar() {
           <div className="flex justify-center max-w-7xl w-full pl-8 pr-8">
             <div className="flex items-center justify-between w-full h-16 ">
               <div className="">
-                <Typography variant="h2" className="text-xl font-bold text-black-300">
+                <Typography variant="h2">
                   Best Mobile
                 </Typography>
               </div>
