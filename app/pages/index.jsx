@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import { UserContext } from "../lib/context";
-import Dashboard from "./Dashboard";
+import Dashboard from "./dashboard";
 
 const Index = () => {
   const context = useContext(UserContext);
