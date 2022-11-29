@@ -12,10 +12,11 @@ body,
   width: 100%;
   font-family: 'Source Sans Pro', sans-serif;
   --doc-height: 100%;
+  
 }
 
 body{
-  position: fixed;
+  /* position: fixed; */
 }
 
 .app {
