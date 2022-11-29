@@ -3,7 +3,7 @@ import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./fontawesome";
 import Link from "next/link";
-import { auth, googleAuthProvider } from "../firebase/initFirebase";
+import { auth, googleAuthProvider } from "../lib/firebase";
 import { signInWithPopup } from "firebase/auth";
 import { useRouter } from "next/router";
 import { UserContext } from "../lib/context";

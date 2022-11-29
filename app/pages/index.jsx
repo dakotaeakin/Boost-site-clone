@@ -1,10 +1,8 @@
-import Image from "next/image";
 import React, { useContext, useEffect } from "react";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
-import umbrella from "../public/umbrella.svg";
 import { useRouter } from "next/router";
 import { UserContext } from "../lib/context";
+import Dashboard from "./Dashboard";
+import Login from "./Login/login";
 
 const Index = () => {
   const context = useContext(UserContext);
@@ -19,11 +17,7 @@ const Index = () => {
 
   return (
     <>
-      <div className="flex justify-center w-full h-full bg-[#f1f1f1]">
-        <div className="max-w-7xl">
-          <div className="pt-8">Coming soon!</div>
-        </div>
-      </div>
+      <Dashboard />
     </>
   );
 };
