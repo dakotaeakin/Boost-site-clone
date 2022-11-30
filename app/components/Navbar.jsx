@@ -9,7 +9,16 @@ import { UserContext } from "../lib/context";
 import { getAuth, signOut } from "firebase/auth";
 import Dropdown from "./Dropdown";
 import { classNames } from "../lib/hooks";
-import { Box, Typography, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import PersonIcon from "@mui/icons-material/Person";
+import { tokens } from "../theme";
 
 var loggedIn = false;
 
@@ -45,6 +54,9 @@ export default function Navbar() {
     signOut(auth);
   };
 
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
   return (
     <Box
       display="flex"
@@ -78,7 +90,9 @@ export default function Navbar() {
             height="4rem"
           >
             <Box>
-              <Typography variant="h2">Best Mobile</Typography>
+              <Typography variant="h2" color="primary">
+                Best Mobile
+              </Typography>
             </Box>
             <Box
               display="flex"
@@ -107,12 +121,30 @@ export default function Navbar() {
                   />
 
                   <Box p="0 16px 0 0">Hi, {context.firstName}!</Box>
-                  <a //replace with mui icon?
+                  {/* <a //replace with mui icon?
                     onClick={() => setDisplay(!display)}
                     style={{ cursor: "pointer", borderRadius: "9999px" }}
                   >
                     <Image src={userPic} width={20} height={20} />
-                  </a>
+                  </a> */}
+                  <IconButton
+                    sx={{
+                      padding: "0 !important",
+                      "&:hover": {
+                        backgroundColor: colors.primary[500],
+                        transition: "0.3s",
+                      },
+                    }}
+                  >
+                    <PersonOutlineOutlinedIcon
+                      color="primary"
+                      sx={{
+                        width: "24px",
+                        height: "24px",
+                        "&:hover": { color: "white", transition: "0.3s" },
+                      }}
+                    />
+                  </IconButton>
                 </Box>
               ) : null}
               {/* Profile dropdown */}
