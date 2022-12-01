@@ -121,12 +121,7 @@ export default function Navbar() {
                   />
 
                   <Box p="0 16px 0 0">Hi, {context.firstName}!</Box>
-                  {/* <a //replace with mui icon?
-                    onClick={() => setDisplay(!display)}
-                    style={{ cursor: "pointer", borderRadius: "9999px" }}
-                  >
-                    <Image src={userPic} width={20} height={20} />
-                  </a> */}
+
                   <IconButton
                     sx={{
                       padding: "0 !important",
