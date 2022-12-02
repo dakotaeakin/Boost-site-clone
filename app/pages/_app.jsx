@@ -35,6 +35,7 @@ function MyApp({ Component, pageProps }) {
                   width="100vw"
                   maxWidth="80rem"
                   minHeight="calc(100vh - 128px - 64px)"
+                  justifyContent="center"
                 >
                   {Component.requireAuth ? (
                     <AuthGuard>
