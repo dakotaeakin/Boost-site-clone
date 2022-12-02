@@ -11,7 +11,10 @@ import Dropdown from "./Dropdown";
 import { classNames } from "../lib/hooks";
 import {
   Box,
+  Collapse,
   IconButton,
+  List,
+  ListItemButton,
   Typography,
   useMediaQuery,
   useTheme,
@@ -104,7 +107,7 @@ export default function Navbar() {
             >
               {context.user ? (
                 <Box display="flex" alignItems="center" position="relative">
-                  <Dropdown
+                  {/* <Dropdown
                     hideable={true}
                     style="absolute top-[45px] right-0"
                     display={display}
@@ -118,7 +121,7 @@ export default function Navbar() {
                         </button>
                       </Box>
                     }
-                  />
+                  /> */}
 
                   <Box p="0 16px 0 0">Hi, {context.firstName}!</Box>
 
@@ -130,6 +133,7 @@ export default function Navbar() {
                         transition: "0.3s",
                       },
                     }}
+                    onClick={() => setDisplay(!display)}
                   >
                     <PersonOutlineOutlinedIcon
                       color="primary"
@@ -143,6 +147,16 @@ export default function Navbar() {
                 </Box>
               ) : null}
               {/* Profile dropdown */}
+              <Box
+                sx={{ position: "absolute", top: "45px", right: "50px" }}
+                backgroundColor="red"
+              >
+                <Collapse in={display}>
+                  <List>
+                    <ListItemButton>Sign Out</ListItemButton>
+                  </List>
+                </Collapse>
+              </Box>
             </Box>
           </Box>
         </Box>
