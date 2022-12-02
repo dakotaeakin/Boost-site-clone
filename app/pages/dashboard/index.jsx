@@ -5,18 +5,18 @@ const Dashboard = () => {
   return (
     <Box
       boxShadow="0 0 5px black"
-      height="fit-content"
-      width="fit-content"
-      m="30px 0 30px 0"
       borderRadius="5px"
-      display="grid"
-      gap="30px"
+      display="flex"
+      m="30px"
+      width="100%"
+      // height="100%"
+      sx={{ height: "calc(100% - 60px)" }}
     >
       <Box
         boxShadow="0 0 5px black"
         height="fit-content"
         width="fit-content"
-        m="30px 0 30px 0"
+        m="30px"
         borderRadius="5px"
         gridColumn="1"
       >
@@ -27,36 +27,65 @@ const Dashboard = () => {
           </List>
         </Box>
       </Box>
-
-      <Box
-        boxShadow="0 0 5px black"
-        height="fit-content"
-        width="fit-content"
-        m="30px 0 30px 0"
-        borderRadius="5px"
-        gridColumn="2"
-      >
-        <Box>Ad box</Box>
-      </Box>
-      <Box
-        boxShadow="0 0 5px black"
-        height="fit-content"
-        width="fit-content"
-        m="30px 0 30px 0"
-        borderRadius="5px"
-        gridColumn="3"
-      >
-        <Box>Ad box</Box>
-      </Box>
       <Box
         boxShadow="0 0 5px black"
         height="fit-content"
         width="100%"
-        m="30px 0 30px 0"
+        m="30px"
         borderRadius="5px"
-        gridColumn="2 / span 2"
+        gridColumn="2"
+        display="grid"
       >
-        <Box>Ad box</Box>
+        <Box
+          boxShadow="0 0 5px black"
+          height="fit-content"
+          width="fit-content"
+          m="30px"
+          borderRadius="5px"
+          gridColumn=""
+        >
+          <Box>Ad box</Box>
+        </Box>
+        <Box
+          boxShadow="0 0 5px black"
+          height="fit-content"
+          width="fit-content"
+          m="30px"
+          borderRadius="5px"
+          gridColumn=""
+        >
+          <Box>Ad box</Box>
+        </Box>
+        <Box
+          boxShadow="0 0 5px black"
+          height="fit-content"
+          // width="fit-content"
+          m="30px"
+          borderRadius="5px"
+          gridColumn="1 / span 2"
+        >
+          <Box>Ad box</Box>
+        </Box>
+        <Box
+          boxShadow="0 0 5px black"
+          height="fit-content"
+          // width="fit-content"
+          m="30px"
+          borderRadius="5px"
+          gridColumn="1 / span 2"
+        >
+          <Box>Ad box</Box>
+        </Box>
+        <Box
+          boxShadow="0 0 5px black"
+          height="fit-content"
+          // width="fit-content"
+          m="30px"
+          borderRadius="5px"
+          gridColumn="1 / span 2"
+        >
+          <Box>Ad box</Box>
+        </Box>
       </Box>
     </Box>
   );

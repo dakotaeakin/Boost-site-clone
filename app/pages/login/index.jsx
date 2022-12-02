@@ -6,6 +6,7 @@ import { useUserData } from "../../lib/hooks";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { UserContext } from "../../lib/context";
 import {
+  Box,
   Button,
   InputAdornment,
   styled,

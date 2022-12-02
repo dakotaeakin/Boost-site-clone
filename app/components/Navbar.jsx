@@ -11,6 +11,7 @@ import Dropdown from "./Dropdown";
 import { classNames } from "../lib/hooks";
 import {
   Box,
+  Button,
   Collapse,
   IconButton,
   List,
@@ -70,12 +71,14 @@ export default function Navbar() {
     >
       <>
         <Box
-          className={classNames(
-            display
-              ? "absolute h-full w-full bg-gray-400 top-0 right-0 bopttom-0 left-0 opacity-50"
-              : "hidden"
-          )}
+          position="absolute"
+          height="calc(100vh - 63px)"
+          width="100%"
+          backgroundColor={colors.grey[500]}
+          top="63px"
           onClick={() => setDisplay(!display)}
+          hidden={display ? false : true}
+          sx={{ opacity: "0.5" }}
         ></Box>
         <Box
           display="flex"
@@ -90,7 +93,7 @@ export default function Navbar() {
             justifyContent="space-between"
             alignItems="center"
             width="100%"
-            height="4rem"
+            height="64px"
           >
             <Box>
               <Typography variant="h2" color="primary">
@@ -148,12 +151,36 @@ export default function Navbar() {
               ) : null}
               {/* Profile dropdown */}
               <Box
-                sx={{ position: "absolute", top: "45px", right: "50px" }}
-                backgroundColor="red"
+                sx={{
+                  position: "absolute",
+                  top: "63px",
+                  right: "251px",
+                  borderBottomLeftRadius: "5px",
+                  borderBottomRightRadius: "5px",
+                }}
+                backgroundColor={colors.grey[100]}
               >
-                <Collapse in={display}>
-                  <List>
-                    <ListItemButton>Sign Out</ListItemButton>
+                <Collapse in={display} sx={{ borderRadius: "5px" }}>
+                  <List sx={{ m: "10px", borderRadius: "5px" }}>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        gridColumn: isNonMobile ? undefined : "span 2",
+                        fontSize: "11px",
+                        height: isNonMobile ? "35px" : undefined,
+                        backgroundColor: `${colors.primary[500]} !important`,
+                        "&:hover": {
+                          backgroundColor: `${colors.orangeAccent[500]} !important`,
+                          transition: "0.3s",
+                        },
+                      }}
+                      onClick={() => {
+                        signUserOut();
+                        setDisplay(!display);
+                      }}
+                    >
+                      Sign Out
+                    </Button>
                   </List>
                 </Collapse>
               </Box>

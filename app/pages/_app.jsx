@@ -25,10 +25,17 @@ function MyApp({ Component, pageProps }) {
                 display="flex"
                 flexDirection="column"
                 alignItems="center"
-                minHeight="100vh"
+                height="100vh"
               >
                 <Navbar />
-                <Box className="flex-grow z-0">
+                <Box
+                  display="flex"
+                  zIndex="0"
+                  height="fit-content"
+                  width="100vw"
+                  maxWidth="80rem"
+                  minHeight="calc(100vh - 128px - 64px)"
+                >
                   {Component.requireAuth ? (
                     <AuthGuard>
                       <Component {...pageProps} />
