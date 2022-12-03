@@ -16,6 +16,17 @@ export const tokens = (mode) => ({
           800: "#292929",
           900: "#141414",
         },
+        white: {
+          100: "#fffffe",
+          200: "#fffefd",
+          300: "#fffefc",
+          400: "#fffdfb",
+          500: "#fffdfa",
+          600: "#cccac8",
+          700: "#999896",
+          800: "#666564",
+          900: "#333332",
+        },
         primary: {
           100: "#fcdfd0",
           200: "#fabea0",
@@ -207,7 +218,7 @@ export const themeSettings = (mode) => {
               light: colors.grey[100],
             },
             background: {
-              default: colors.grey[100],
+              default: colors.white[500],
             },
           }
         : {
@@ -223,11 +234,14 @@ export const themeSettings = (mode) => {
               light: colors.grey[100],
             },
             background: {
-              default: colors.primary[500],
+              default: colors.primary[100],
             },
           }),
     },
     typography: {
+      allVariants: {
+        color: colors.black[500],
+      },
       fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
       fontSize: 12,
       h1: {
@@ -237,7 +251,6 @@ export const themeSettings = (mode) => {
       h2: {
         fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
         fontSize: 32,
-        color: colors.black[500], //add a text color
       },
       h3: {
         fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
@@ -254,6 +267,23 @@ export const themeSettings = (mode) => {
       h6: {
         fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
         fontSize: 14,
+      },
+    },
+    components: {
+      MuiListItemButton: {
+        styleOverrides: {
+          root: {
+            // backgroundColor: colors.primary[500],
+            // borderRadius: "5px",
+
+            "&:hover, &.Mui-selected:hover": {
+              backgroundColor: colors.grey[200],
+            },
+            "&.Mui-selected": {
+              backgroundColor: colors.grey[100],
+            },
+          },
+        },
       },
     },
   };

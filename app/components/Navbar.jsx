@@ -159,7 +159,7 @@ export default function Navbar() {
                   borderBottomLeftRadius: "5px",
                   borderBottomRightRadius: "5px",
                 }}
-                backgroundColor={colors.grey[100]}
+                backgroundColor={colors.white[500]}
               >
                 <Collapse in={display} sx={{ borderRadius: "5px" }}>
                   <List sx={{ m: "10px", borderRadius: "5px" }}>
