@@ -94,6 +94,7 @@ export default function Navbar() {
             alignItems="center"
             width="100%"
             height="64px"
+            position="relative"
           >
             <Box>
               <Typography variant="h2" color="primary">
@@ -154,7 +155,7 @@ export default function Navbar() {
                 sx={{
                   position: "absolute",
                   top: "63px",
-                  right: "251px",
+                  right: "0",
                   borderBottomLeftRadius: "5px",
                   borderBottomRightRadius: "5px",
                 }}
