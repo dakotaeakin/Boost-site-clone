@@ -46,6 +46,9 @@ const Dashboard = () => {
                 }}
                 sx={{
                   textAlign: "center",
+                  "&.Mui-selected": {
+                    boxShadow: "inset 0 0 5px black",
+                  },
                 }}
               >
                 <ListItemText primary="Home" />
@@ -57,7 +60,12 @@ const Dashboard = () => {
                 onClick={() => {
                   setActiveTab(tabs.usage);
                 }}
-                sx={{ textAlign: "center" }}
+                sx={{
+                  textAlign: "center",
+                  "&.Mui-selected": {
+                    boxShadow: "inset 0 0 5px black",
+                  },
+                }}
               >
                 <ListItemText primary="Usage" />
               </ListItemButton>
@@ -68,7 +76,12 @@ const Dashboard = () => {
                 onClick={() => {
                   setActiveTab(tabs.settings);
                 }}
-                sx={{ textAlign: "center" }}
+                sx={{
+                  textAlign: "center",
+                  "&.Mui-selected": {
+                    boxShadow: "inset 0 0 5px black",
+                  },
+                }}
               >
                 <ListItemText primary="Settings" />
               </ListItemButton>

@@ -1,14 +1,10 @@
 import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
-import Image from "next/image";
-import logo from "../public/logo.png";
-import userPic from "../public/user.png";
+
 import { useRouter } from "next/router";
 import { UserContext } from "../lib/context";
 import { getAuth, signOut } from "firebase/auth";
-import Dropdown from "./Dropdown";
-import { classNames } from "../lib/hooks";
 import {
   Box,
   Button,

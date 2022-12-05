@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }) {
                 display="flex"
                 flexDirection="column"
                 alignItems="center"
-                height="100vh"
+                minHeight="100vh"
               >
                 <Navbar />
                 <Box
