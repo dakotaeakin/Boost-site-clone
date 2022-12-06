@@ -1,7 +1,7 @@
 import { Box, Button, keyframes, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { tokens } from "../../theme";
+import { tokens } from "../../../theme";
 
 const Ad = () => {
   const theme = useTheme();
