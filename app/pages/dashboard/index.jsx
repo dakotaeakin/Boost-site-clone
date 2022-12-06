@@ -10,22 +10,9 @@ import Home from "../../components/dashboard/Home";
 import Settings from "../../components/dashboard/Settings";
 import Usage from "../../components/dashboard/Usage";
 
-export async function getStaticProps() {
-  const billData = {
-    dueDate: "2022-12-22",
-    amount: "25.00",
-  };
-  return {
-    props: {
-      billData,
-    },
-  };
-}
-
-const Dashboard = ({ billData }) => {
-  console.log(billData);
+const Dashboard = () => {
   const tabs = {
-    home: { component: <Home billData={billData} />, name: "home" },
+    home: { component: <Home />, name: "home" },
     usage: { component: <Usage />, name: "usage" },
     settings: { component: <Settings />, name: "settings" },
   };
