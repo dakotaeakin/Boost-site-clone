@@ -46,7 +46,7 @@ const Ad = () => {
       boxShadow="0 0 5px black"
       height="100px"
       font-size="50px"
-      m="30px"
+      m="30px 30px 0px 30px"
       borderRadius="5px"
       gridColumn="1 / span 2"
       backgroundColor={colors.black[600]}

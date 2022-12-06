@@ -2,6 +2,7 @@ import { Box, Button, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 import { tokens } from "../../../theme";
+import CheckIcon from "@mui/icons-material/Check";
 
 const AppAd = () => {
   const theme = useTheme();
@@ -26,16 +27,19 @@ const AppAd = () => {
         </Typography>
         <Box>
           <Typography varinat="h3" color={colors.white[500]}>
+            <CheckIcon sx={{ m: "0 5px 5px 0" }} />
             Exclusive Perks
           </Typography>
         </Box>
         <Box>
           <Typography varinat="h3" color={colors.white[500]}>
+            <CheckIcon sx={{ m: "0 5px 5px 0" }} />
             Special Deals
           </Typography>
         </Box>
         <Box>
           <Typography varinat="h3" color={colors.white[500]}>
+            <CheckIcon sx={{ m: "0 5px 5px 0" }} />
             Chances to win VIP experiances
           </Typography>
         </Box>
@@ -46,7 +50,7 @@ const AppAd = () => {
         gridTemplateColumns="50% 50%"
         m="0 15px 0 15px"
       >
-        <Box display="flex" gridColumn="1">
+        <Box display="flex" gap="5px" gridColumn="1">
           <Image height={64} width={64} src="/../public/appStore128.png" />
           <Image height={64} width={64} src="/../public/playStore128.png" />
         </Box>
