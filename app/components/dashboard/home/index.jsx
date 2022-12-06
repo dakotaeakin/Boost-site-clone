@@ -7,10 +7,9 @@ import Ad from "./Ad";
 import AppAd from "./AppAd";
 import PaymentBox from "./PaymentBox";
 
-const Home = (billData) => {
+const Home = (data) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
   return (
     <Box
       // boxShadow="0 0 5px black"
@@ -24,7 +23,7 @@ const Home = (billData) => {
     >
       <Ad />
       <AppAd />
-      <PaymentBox billData={billData} sx={{ gridColumn: "span 1" }} />
+      <PaymentBox billData={data.billData} sx={{ gridColumn: "span 1" }} />
       <Box
         boxShadow="0 0 5px black"
         height="fit-content"

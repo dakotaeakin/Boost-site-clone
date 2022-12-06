@@ -11,11 +11,12 @@ import React, { useState } from "react";
 import { tokens } from "../../../theme";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import { parseDate } from "../../../lib/hooks";
 
-const PaymentBox = (billData) => {
+const PaymentBox = (data) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  // console.log("test", billData);
+
   return (
     <Box
       boxShadow="0 0 5px black"
@@ -30,10 +31,10 @@ const PaymentBox = (billData) => {
           Payment
         </Typography>
         <Typography pb="6px" variant="h5">
-          Due Dec 22, 2022
+          Due {parseDate(data.billData.dueDate)}
         </Typography>
         <Typography variant="h2" sx={{ fontWeight: "bold" }}>
-          $25.00
+          ${data.billData.amount}
           <IconButton sx={{ color: "black", p: "0" }}>
             <HelpOutlineIcon
               sx={{ p: "0 0 6px 6px", height: "22px", width: "22px" }}

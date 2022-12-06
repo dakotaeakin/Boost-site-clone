@@ -10,9 +10,9 @@ import Home from "../../components/dashboard/Home";
 import Settings from "../../components/dashboard/Settings";
 import Usage from "../../components/dashboard/Usage";
 
-const Dashboard = () => {
+const Dashboard = (billData) => {
   const tabs = {
-    home: { component: <Home />, name: "home" },
+    home: { component: <Home billData={billData.billData} />, name: "home" },
     usage: { component: <Usage />, name: "usage" },
     settings: { component: <Settings />, name: "settings" },
   };
