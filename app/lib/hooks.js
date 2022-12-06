@@ -49,3 +49,14 @@ export function useOutsideAlerter(ref) {
     };
   }, [ref]);
 }
+
+/** Parse a string containing a date and return a date string formatted as Month day, year */
+export const parseDate = (date) => {
+  let dateObj = new Date(date);
+  let formattedDate = dateObj.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  return formattedDate;
+};

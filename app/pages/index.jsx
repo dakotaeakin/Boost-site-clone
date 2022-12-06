@@ -1,15 +1,27 @@
 import React, { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import { UserContext } from "../lib/context";
-import Dashboard from "./dashboard";
+import Dashboard from "../components/dashboard";
 
-const Index = () => {
+export async function getStaticProps() {
+  const data = {
+    dueDate: "2022-12-22",
+    amount: "25.00",
+  };
+  return {
+    props: {
+      billData: data,
+    },
+  };
+}
+
+const Index = ({ billData }) => {
   const context = useContext(UserContext);
   const router = useRouter();
 
   return (
     <>
-      <Dashboard />
+      <Dashboard billData={billData} />
     </>
   );
 };
