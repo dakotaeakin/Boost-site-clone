@@ -10,9 +10,22 @@ import Home from "../../components/dashboard/Home";
 import Settings from "../../components/dashboard/Settings";
 import Usage from "../../components/dashboard/Usage";
 
-const Dashboard = () => {
+export async function getStaticProps() {
+  const billData = {
+    dueDate: "2022-12-22",
+    amount: "25.00",
+  };
+  return {
+    props: {
+      billData,
+    },
+  };
+}
+
+const Dashboard = ({ billData }) => {
+  console.log(billData);
   const tabs = {
-    home: { component: <Home />, name: "home" },
+    home: { component: <Home billData={billData} />, name: "home" },
     usage: { component: <Usage />, name: "usage" },
     settings: { component: <Settings />, name: "settings" },
   };
@@ -20,10 +33,10 @@ const Dashboard = () => {
 
   return (
     <Box
-      boxShadow="0 0 5px black"
-      borderRadius="5px"
+      // boxShadow="0 0 5px black"
+      // borderRadius="5px"
       display="flex"
-      m="30px"
+      // m="30px"
       width="100%"
       // height="100%"
       sx={{ height: "calc(100% - 60px)" }}
@@ -32,7 +45,7 @@ const Dashboard = () => {
         boxShadow="0 0 5px black"
         height="fit-content"
         width="fit-content"
-        m="30px"
+        m="60px 30px 30px 30px"
         borderRadius="5px"
         gridColumn="1"
       >
