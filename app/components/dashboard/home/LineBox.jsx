@@ -27,7 +27,12 @@ const LineBox = () => {
         <Box>
           <Typography>Data Usage</Typography>
           <Box>
-            {/* usageImage */}
+            <Box sx={{ height: "20px", width: "20px" }}>
+              <svg>
+                <rect width="100%" height="20px" fill="grey" rx="5" />
+                <rect width="50%" height="20px" fill="green" rx="5" />
+              </svg>
+            </Box>
             <Box>
               <Typography>You've used 2.0GB so far this month</Typography>
               <Typography>
