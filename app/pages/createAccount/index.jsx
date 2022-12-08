@@ -11,17 +11,33 @@ import { Formik } from "formik";
 import Link from "next/link";
 import React, { useContext, useState } from "react";
 import * as yup from "yup";
-import { auth, createUser, updateUser } from "../../lib/firebase";
+import { auth, createUser, signIn, updateUser } from "../../lib/firebase";
 import { tokens } from "../../theme";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
+import { useEffect } from "react";
+import { UserContext } from "../../lib/context";
+import Router from "next/router";
 
 const createAccount = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  const context = useContext(UserContext);
+
+  useEffect(() => {
+    if (context.user) {
+      Router.push("/");
+    }
+  }, [context]);
+
   const [showPassword, setShowPassword] = useState(false);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({
+    uid: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
   const [isError, setIsError] = useState();
 
   const createWithEmail = async (values) => {
@@ -31,17 +47,29 @@ const createAccount = () => {
         values.email,
         values.password
       );
-
-      setUser((prevUser) => ({
-        ...prevUser,
+      setUser({
         uid: userCredential.user.uid,
-      }));
-      console.log(userCredential.user.uid);
-      updateUser(user, userCredential.user.uid);
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+      });
     } catch (error) {
       errorHandler(error);
     }
+    loginEmail(values.email, values.password);
   };
+
+  const loginEmail = async (emailTxt, passTxt) => {
+    try {
+      const userCredential = await signIn(auth, emailTxt, passTxt);
+    } catch (error) {
+      // errorHandler(error);
+    }
+  };
+
+  useEffect(() => {
+    updateUser(user, user.uid);
+  }, [user]);
 
   const errorHandler = (error) => {
     console.log(error.code);

@@ -1,7 +1,7 @@
 import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { initializeApp } from "firebase/app";
-import {  getFirestore } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -45,7 +45,7 @@ export async function getAllUserData() {
   Will change for loop so that if a image is added or changed to a user profile the download url 
   will be added to userData to avoid needing to retieve it each time.
   */
-  for (let i = 0; i < users.length; i++) { 
+  for (let i = 0; i < users.length; i++) {
     //Loop through user data and get image url
     var imageRef = ref(storage, `profilePhotos/${users[i].Pic}`);
     var imageUrl = await getDownloadURL(imageRef);
@@ -56,10 +56,15 @@ export async function getAllUserData() {
   return users;
 }
 
-export async function updateUser(dict, uid) {
-  await setDoc(doc(db, "users", uid), {
-    firstName: dict.firstName,
-    lastName: dict.lastName,
-    email: dict.email,
-  });
+export async function updateUser(dict) {
+  if (dict.uid) {
+    console.log(dict);
+    await setDoc(doc(db, "users", dict.uid), {
+      firstName: dict.firstName,
+      lastName: dict.lastName,
+      email: dict.email,
+    });
+  } else {
+    console.log("no uid");
+  }
 }
