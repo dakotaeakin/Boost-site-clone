@@ -5,6 +5,7 @@ import React from "react";
 import { tokens } from "../../../theme";
 import Ad from "./Ad";
 import AppAd from "./AppAd";
+import LineBox from "./LineBox";
 import PaymentBox from "./PaymentBox";
 
 const Home = (data) => {
@@ -24,16 +25,7 @@ const Home = (data) => {
       <Ad />
       <AppAd />
       <PaymentBox billData={data.billData} sx={{ gridColumn: "span 1" }} />
-      <Box
-        boxShadow="0 0 5px black"
-        height="fit-content"
-        // width="fit-content"
-        m="30px"
-        borderRadius="5px"
-        gridColumn="1 / span 2"
-      >
-        <Box>Ad box</Box>
-      </Box>
+      <LineBox />
       <Box
         boxShadow="0 0 5px black"
         height="fit-content"
