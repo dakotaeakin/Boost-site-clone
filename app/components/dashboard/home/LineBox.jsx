@@ -5,6 +5,7 @@ import {
   IconButton,
   Link,
   Typography,
+  useMediaQuery,
   useTheme,
 } from "@mui/material";
 import { tokens } from "../../../theme";
@@ -12,16 +13,18 @@ import { tokens } from "../../../theme";
 const LineBox = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const isNonMobile = useMediaQuery("(min-width:600px)");
+
   return (
     <Box
       boxShadow="0 0 5px black"
       height="fit-content"
-      m="0 30px 0 30px"
+      m={isNonMobile ? "0 30px 0 30px" : "0 60px 0 30px"}
       borderRadius="5px"
       gridColumn="1 / span 2"
     >
       <Box display="grid" gridTemplateColumns="50% 50%">
-        <Box m="15px" gridColumn="1">
+        <Box m="15px" gridColumn={isNonMobile ? "1" : "1 / span 2"}>
           <Typography variant="h4" sx={{ fontWeight: "bold" }}>
             My Line
           </Typography>
@@ -32,7 +35,7 @@ const LineBox = () => {
               borderWidth: "0.2px",
               borderRadius: "5px",
               borderColor: `${colors.black[100]}`,
-              m: "15px 15px 0 0",
+              m: `${isNonMobile ? "15px 15px 0 0" : "15px 0px 0 0"}`,
             }}
           >
             <Box m="10px">
@@ -49,15 +52,22 @@ const LineBox = () => {
               borderWidth: "0.2px",
               borderRadius: "5px",
               borderColor: `${colors.black[100]}`,
-              m: "15px 15px 0 0",
+              m: `${isNonMobile ? "15px 15px 0 0" : "15px 0px 0 0"}`,
             }}
           >
             <Box m="10px">
               <Typography variant="h5" sx={{ fontWeight: "bold" }}>
                 Data Usage
               </Typography>
-              <Box display="grid" gridTemplateColumns="50% 50%" gap="20px">
-                <Box sx={{ height: "20px", width: "100%", m: "10px 10px 0 0" }}>
+              <Box
+                display="grid"
+                gridTemplateColumns="repeat(2, 1fr)"
+                gap="20px"
+              >
+                <Box
+                  gridColumn={isNonMobile ? "1" : "1 / span 2"}
+                  sx={{ height: "20px", width: "100%", m: "10px 10px 0 0" }}
+                >
                   <Box
                     borderRadius="5px"
                     height="10px"
@@ -100,7 +110,10 @@ const LineBox = () => {
                     <Typography variant="h4">14 days left</Typography>
                   </Box>
                 </Box>
-                <Box>
+                <Box
+                  gridColumn={isNonMobile ? "2" : "1 / span 2"}
+                  mt={isNonMobile ? "" : "100px"}
+                >
                   <Typography>You've used 3.0GB so far this month</Typography>
                   <Typography>
                     Add more data to hold you over until next month

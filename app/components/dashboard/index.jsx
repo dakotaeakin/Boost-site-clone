@@ -4,6 +4,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
+  useMediaQuery,
 } from "@mui/material";
 import React, { useState } from "react";
 import Home from "../../components/dashboard/Home";
@@ -17,6 +18,7 @@ const Dashboard = (billData) => {
     settings: { component: <Settings />, name: "settings" },
   };
   const [activeTab, setActiveTab] = useState(tabs.home);
+  const isNonMobile = useMediaQuery("(min-width:600px)");
 
   return (
     <Box
@@ -35,6 +37,7 @@ const Dashboard = (billData) => {
         m="60px 30px 30px 30px"
         borderRadius="5px"
         gridColumn="1"
+        hidden={!isNonMobile}
       >
         <Box m="30px 0 30px 0">
           <List>

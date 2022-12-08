@@ -1,4 +1,11 @@
-import { Box, Button, keyframes, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  keyframes,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import Image from "next/image";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { tokens } from "../../../theme";
@@ -13,6 +20,7 @@ const Ad = () => {
   const [circlesAnimationX, setCirclesAnimationX] = useState();
   const [circlesAnimationY, setCirclesAnimationY] = useState();
   const [playAnimation, setPlayAnimation] = useState(false);
+  const isNonMobile = useMediaQuery("(min-width:600px)");
 
   /*
   useEffect(() => {
@@ -46,7 +54,7 @@ const Ad = () => {
       boxShadow="0 0 5px black"
       height="100px"
       font-size="50px"
-      m="30px 30px 0px 30px"
+      m={isNonMobile ? "30px 30px 0 30px" : "0 60px 0 30px"}
       borderRadius="5px"
       gridColumn="1 / span 2"
       backgroundColor={colors.black[600]}
