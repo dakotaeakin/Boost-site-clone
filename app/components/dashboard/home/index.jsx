@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/system";
 import Image from "next/image";
 import React from "react";
@@ -11,6 +11,8 @@ import PaymentBox from "./PaymentBox";
 const Home = (data) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const isNonMobile = useMediaQuery("(min-width:600px)");
+
   return (
     <Box
       // boxShadow="0 0 5px black"

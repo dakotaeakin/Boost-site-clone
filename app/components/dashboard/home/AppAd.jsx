@@ -1,4 +1,10 @@
-import { Box, Button, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import Image from "next/image";
 import React from "react";
 import { tokens } from "../../../theme";
@@ -7,13 +13,15 @@ import CheckIcon from "@mui/icons-material/Check";
 const AppAd = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const isNonMobile = useMediaQuery("(min-width:600px)");
+
   return (
     <Box
       boxShadow="0 0 5px black"
       height="fit-content"
-      m="0 0 0 30px"
+      m={isNonMobile ? "0 0 0 30px" : "0 60px 0 30px"}
       borderRadius="5px"
-      gridColumn="span 1"
+      gridColumn={isNonMobile ? "span 1" : "1 / span 2"}
       display="flex"
       flexDirection="column"
       alignItems="start"

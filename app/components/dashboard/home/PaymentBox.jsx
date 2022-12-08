@@ -4,6 +4,7 @@ import {
   IconButton,
   Link,
   Typography,
+  useMediaQuery,
   useTheme,
 } from "@mui/material";
 import Image from "next/image";
@@ -16,15 +17,17 @@ import { parseDate } from "../../../lib/hooks";
 const PaymentBox = (data) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const isNonMobile = useMediaQuery("(min-width:600px)");
 
   return (
     <Box
       boxShadow="0 0 5px black"
       height="100%"
-      m="0 30px 0 0"
+      m={isNonMobile ? "0 30px 0 0" : "0 60px 30px 30px"}
       borderRadius="5px"
       display="flex"
       justifyContent="space-between"
+      gridColumn={isNonMobile ? "2" : "1 / span 2"}
     >
       <Box p="15px 0 0 30px">
         <Typography pb="6px" variant="h4">
@@ -62,7 +65,7 @@ const PaymentBox = (data) => {
           <Button
             sx={{
               backgroundColor: `${colors.primary[500]} !important`,
-              width: "150%",
+              width: `${isNonMobile ? "150%" : "100%"}`,
             }}
             variant="contained"
             size="large"
