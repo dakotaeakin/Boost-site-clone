@@ -9,6 +9,7 @@ import {
 import Image from "next/image";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { tokens } from "../../../theme";
+import iphone from "../../../public/iphone.png";
 
 const Ad = () => {
   const theme = useTheme();
@@ -63,11 +64,7 @@ const Ad = () => {
     >
       <Box>
         <Box zIndex="1" sx={{ position: "absolute", top: "25px" }}>
-          <Image
-            height={200}
-            width={200}
-            src="/../public/iPhone_14_Pro_Max_Space_Black_phonewall.png"
-          />
+          <Image height={200} width={200} src={iphone} />
         </Box>
       </Box>
       <Typography
