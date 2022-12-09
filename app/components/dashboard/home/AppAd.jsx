@@ -9,6 +9,8 @@ import Image from "next/image";
 import React from "react";
 import { tokens } from "../../../theme";
 import CheckIcon from "@mui/icons-material/Check";
+import appStore from "../../../public/appStore128.png";
+import playStore from "../../../public/playStore128.png";
 
 const AppAd = () => {
   const theme = useTheme();
@@ -59,8 +61,8 @@ const AppAd = () => {
         m="0 15px 0 15px"
       >
         <Box display="flex" gap="5px" gridColumn="1">
-          <Image height={64} width={64} src="/../public/appStore128.png" />
-          <Image height={64} width={64} src="/../public/playStore128.png" />
+          <Image height={64} width={64} src={appStore} />
+          <Image height={64} width={64} src={playStore} />
         </Box>
         <Box
           gridColumn="2"
