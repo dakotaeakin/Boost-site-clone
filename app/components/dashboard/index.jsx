@@ -19,6 +19,7 @@ const Dashboard = (billData) => {
   };
   const [activeTab, setActiveTab] = useState(tabs.home);
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  console.log(isNonMobile);
 
   return (
     <Box
