@@ -60,7 +60,7 @@ const AppAd = () => {
         gridTemplateColumns="50% 50%"
         m="0 15px 0 15px"
       >
-        <Box display="flex" gap="5px" gridColumn="1">
+        <Box display="flex" justifySelf="flex-start" gap="5px" gridColumn="1">
           <Image height={64} width={64} src={appStore} />
           <Image height={64} width={64} src={playStore} />
         </Box>
