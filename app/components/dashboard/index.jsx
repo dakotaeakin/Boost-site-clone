@@ -7,7 +7,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import React, { useState } from "react";
-import Home from "../../components/dashboard/Home";
+import Home from "/home/Home";
 import Settings from "../../components/dashboard/Settings";
 import Usage from "../../components/dashboard/Usage";
 
