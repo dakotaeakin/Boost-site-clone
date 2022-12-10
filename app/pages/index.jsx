@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import { UserContext } from "../lib/context";
 import Dashboard from "../components/dashboard";
+import Head from "next/head";
 
 export async function getStaticProps() {
   const data = {

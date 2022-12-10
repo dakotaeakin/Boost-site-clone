@@ -1,4 +1,5 @@
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
+import Head from "next/head";
 import { Router, useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -19,6 +20,12 @@ function MyApp({ Component, pageProps }) {
       <ThemeProvider theme={theme}>
         <UserContext.Provider value={userData}>
           <div className="app">
+            <Head>
+              <meta
+                name="viewport"
+                content="initial-scale=1.0, width=device-width"
+              />
+            </Head>
             <CssBaseline />
             <main className="content">
               <Box
