@@ -68,13 +68,11 @@ const AppAd = () => {
           gridColumn="2"
           display="flex"
           width="100%"
-          // height="fit-content"
           justifyContent="center"
           alignItems="center"
         >
           <Button
             sx={{
-              // maxHeight: "50%",
               color: `${colors.orange[500]}`,
               "&.MuiButton-root": {
                 backgroundColor: `${colors.white[500]}`,
@@ -84,7 +82,6 @@ const AppAd = () => {
                 color: `${colors.white[500]}`,
               },
               m: `${isNonMobile ? "" : "0 5px 5px 0"}`,
-              // height: `${isNonMobile ? "" : "100px"}`,
             }}
             variant="contained"
           >
