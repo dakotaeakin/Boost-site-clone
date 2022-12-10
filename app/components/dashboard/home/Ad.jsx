@@ -53,7 +53,8 @@ const Ad = () => {
       display="flex"
       alignItems="center"
       boxShadow="0 0 5px black"
-      height="100px"
+      minHeight="100px"
+      height="fit-content"
       font-size="50px"
       m={isNonMobile ? "30px 30px 0 30px" : "0 60px 0 30px"}
       borderRadius="5px"
@@ -63,19 +64,22 @@ const Ad = () => {
       overflow="hidden"
     >
       <Box>
-        <Box zIndex="1" sx={{ position: "absolute", top: "25px" }}>
+        <Box
+          zIndex="1"
+          sx={{ position: "absolute", top: "25px" }}
+          hidden={!isNonMobile}
+        >
           <Image height={200} width={200} src={iphone} />
         </Box>
       </Box>
+
       <Typography
-        // width="100%"
-        pr="25%"
+        pr={isNonMobile ? "25%" : "5%"}
         color={colors.white[500]}
         align="right"
         variant="h3"
         zIndex="2"
-        mr="0"
-        ml="auto"
+        m="5px 0 5px auto"
       >
         Get the latest iPhone today!
       </Typography>
