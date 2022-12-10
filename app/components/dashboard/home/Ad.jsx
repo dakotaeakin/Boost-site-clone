@@ -74,7 +74,6 @@ const Ad = () => {
       </Box>
 
       <Typography
-        // width="100%"
         pr={isNonMobile ? "25%" : "5%"}
         color={colors.white[500]}
         align="right"
