@@ -60,7 +60,7 @@ const AppAd = () => {
         gridTemplateColumns="50% 50%"
         m="0 15px 0 15px"
       >
-        <Box display="flex" justifySelf="flex-start" gap="5px" gridColumn="1">
+        <Box display="flex" alignSelf="flex-start" gap="5px" gridColumn="1">
           <Image height={64} width={64} src={appStore} />
           <Image height={64} width={64} src={playStore} />
         </Box>
@@ -68,13 +68,13 @@ const AppAd = () => {
           gridColumn="2"
           display="flex"
           width="100%"
-          height="100%"
+          // height="fit-content"
           justifyContent="center"
           alignItems="center"
         >
           <Button
             sx={{
-              maxHeight: "50%",
+              // maxHeight: "50%",
               color: `${colors.orange[500]}`,
               "&.MuiButton-root": {
                 backgroundColor: `${colors.white[500]}`,
@@ -83,6 +83,8 @@ const AppAd = () => {
                 backgroundColor: `rgba(254, 97, 0, 0.3)`,
                 color: `${colors.white[500]}`,
               },
+              m: `${isNonMobile ? "" : "0 5px 5px 0"}`,
+              // height: `${isNonMobile ? "" : "100px"}`,
             }}
             variant="contained"
           >
