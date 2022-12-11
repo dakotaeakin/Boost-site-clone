@@ -25,6 +25,7 @@
     "firebase": "^9.10.0",
     "firebase-admin": "^10.0.2",
     "formik": "^2.2.9",
+    "material-ui-toggle-icon": "^1.1.2",
     "next": "^12.3.4",
     "react": "^18.0.0",
     "react-dom": "18.0.0",
