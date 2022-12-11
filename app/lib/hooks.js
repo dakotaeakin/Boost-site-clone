@@ -60,3 +60,5 @@ export const parseDate = (date) => {
   });
   return formattedDate;
 };
+
+export const useGlobalData = () => {};
