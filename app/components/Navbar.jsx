@@ -22,10 +22,6 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { tokens } from "../theme";
-import Home from "./dashboard/home/Home";
-import Usage from "./dashboard/Usage";
-import Settings from "./dashboard/Settings";
-import { Dashboard } from "@mui/icons-material";
 
 export default function Navbar(billData) {
   const router = useRouter();
@@ -44,14 +40,6 @@ export default function Navbar(billData) {
   const colors = tokens(theme.palette.mode);
 
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const tabs = {
-    home: { component: <Home billData={billData.billData} />, name: "home" },
-    usage: { component: <Usage />, name: "usage" },
-    settings: { component: <Settings />, name: "settings" },
-  };
-
-  const [activeTab, setActiveTab] = useState(tabs.home);
 
   const { globalData, setGlobalContext } = useContext(GlobalContext);
 
@@ -181,7 +169,6 @@ export default function Navbar(billData) {
                       <>
                         <ListItem disablePadding>
                           <ListItemButton
-                            // selected={activeTab.name === "home"}
                             onClick={() => {
                               setGlobalContext("home");
                               setDisplay(!display);
@@ -198,7 +185,6 @@ export default function Navbar(billData) {
                         </ListItem>
                         <ListItem disablePadding>
                           <ListItemButton
-                            selected={activeTab.name === "usage"}
                             onClick={() => {
                               setGlobalContext("usage");
                               setDisplay(!display);
@@ -215,7 +201,6 @@ export default function Navbar(billData) {
                         </ListItem>
                         <ListItem disablePadding>
                           <ListItemButton
-                            selected={activeTab.name === "settings"}
                             onClick={() => {
                               setGlobalContext("settings");
                               setDisplay(!display);

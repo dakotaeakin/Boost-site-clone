@@ -8,8 +8,8 @@ import {
 } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import Home from "./home/Home";
-import Settings from "../../components/dashboard/Settings";
-import Usage from "../../components/dashboard/Usage";
+import Settings from "../../components/dashboard/settings/Settings";
+import Usage from "../../components/dashboard/usage/Usage";
 import { GlobalContext } from "../../lib/context";
 
 const Dashboard = (billData) => {
