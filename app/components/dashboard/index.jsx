@@ -6,12 +6,15 @@ import {
   ListItemText,
   useMediaQuery,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Home from "./home/Home";
 import Settings from "../../components/dashboard/Settings";
 import Usage from "../../components/dashboard/Usage";
+import { GlobalContext } from "../../lib/context";
 
 const Dashboard = (billData) => {
+  const { globalData, setGlobalContext } = useContext(GlobalContext);
+
   const tabs = {
     home: { component: <Home billData={billData.billData} />, name: "home" },
     usage: { component: <Usage />, name: "usage" },
@@ -19,7 +22,24 @@ const Dashboard = (billData) => {
   };
   const [activeTab, setActiveTab] = useState(tabs.home);
   const isNonMobile = useMediaQuery("(min-width:600px)");
-  console.log(isNonMobile);
+
+  const handleTab = (tab) => {
+    switch (tab) {
+      case "usage":
+        setActiveTab(() => tabs.usage);
+        break;
+      case "settings":
+        setActiveTab(tabs.settings);
+        break;
+      case "home":
+        setActiveTab(tabs.home);
+    }
+  };
+
+  useEffect(() => {
+    handleTab(globalData.dashboard.activeTab);
+    console.log(activeTab);
+  }, [globalData.dashboard.activeTab]);
 
   return (
     <Box

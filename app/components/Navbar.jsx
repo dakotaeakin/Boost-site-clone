@@ -1,9 +1,8 @@
 import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 
 import { useRouter } from "next/router";
-import { UserContext } from "../lib/context";
+import { GlobalContext, UserContext } from "../lib/context";
 import { getAuth, signOut } from "firebase/auth";
 import {
   Box,
@@ -11,37 +10,24 @@ import {
   Collapse,
   IconButton,
   List,
+  ListItem,
   ListItemButton,
+  ListItemText,
+  ToggleButton,
   Typography,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import PersonIcon from "@mui/icons-material/Person";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 import { tokens } from "../theme";
+import Home from "./dashboard/home/Home";
+import Usage from "./dashboard/Usage";
+import Settings from "./dashboard/Settings";
+import { Dashboard } from "@mui/icons-material";
 
-var loggedIn = false;
-
-const navigation = [
-  // {
-  //   name: "Home",
-  //   href: "/",
-  //   current: true,
-  // },
-  // {
-  //   name: "Meet Our Team",
-  //   href: "/about",
-  //   current: false,
-  // },
-  // {
-  //   name: "Contact",
-  //   href: "/contact",
-  //   current: false,
-  // },
-  //   { name: "Calendar", href: "#", current: false },
-];
-
-export default function Navbar() {
+export default function Navbar(billData) {
   const router = useRouter();
   const path = router.pathname;
   const context = useContext(UserContext);
@@ -56,6 +42,18 @@ export default function Navbar() {
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const tabs = {
+    home: { component: <Home billData={billData.billData} />, name: "home" },
+    usage: { component: <Usage />, name: "usage" },
+    settings: { component: <Settings />, name: "settings" },
+  };
+
+  const [activeTab, setActiveTab] = useState(tabs.home);
+
+  const { globalData, setGlobalContext } = useContext(GlobalContext);
 
   return (
     <Box
@@ -84,7 +82,6 @@ export default function Navbar() {
           p="0 2rem 0 2rem"
         >
           <Box
-            // className="flex items-center justify-between w-full h-16"
             display="flex"
             justifyContent="space-between"
             alignItems="center"
@@ -107,43 +104,55 @@ export default function Navbar() {
             >
               {context.user ? (
                 <Box display="flex" alignItems="center" position="relative">
-                  {/* <Dropdown
-                    hideable={true}
-                    style="absolute top-[45px] right-0"
-                    display={display}
-                    components={
-                      <Box p="0 0.5rem 0 0">
-                        <button
-                          className="bg-[#f25d12] p-2 rounded-xl hover:shadow-lg hover:bg-[#F24712]"
-                          onClick={signUserOut}
-                        >
-                          <Box className="pl-2 pr-2 text-white ">Sign Out</Box>
-                        </button>
-                      </Box>
-                    }
-                  /> */}
-
-                  <Box p="0 16px 0 0">Hi, {context.firstName}!</Box>
-
-                  <IconButton
-                    sx={{
-                      padding: "0 !important",
-                      "&:hover": {
-                        backgroundColor: colors.primary[500],
-                        transition: "0.3s",
-                      },
-                    }}
-                    onClick={() => setDisplay(!display)}
-                  >
-                    <PersonOutlineOutlinedIcon
-                      color="primary"
+                  {isNonMobile ? (
+                    <Box p="0 16px 0 0">Hi, {context.firstName}!</Box>
+                  ) : null}
+                  {isNonMobile ? (
+                    <IconButton
                       sx={{
-                        width: "24px",
-                        height: "24px",
-                        "&:hover": { color: "white", transition: "0.3s" },
+                        padding: "0 !important",
+                        "&:hover": {
+                          backgroundColor: colors.primary[500],
+                          transition: "0.3s",
+                        },
                       }}
-                    />
-                  </IconButton>
+                      onClick={() => setDisplay(!display)}
+                    >
+                      <PersonOutlineOutlinedIcon
+                        color="primary"
+                        sx={{
+                          width: "24px",
+                          height: "24px",
+                          "&:hover": { color: "white", transition: "0.3s" },
+                        }}
+                      />
+                    </IconButton>
+                  ) : (
+                    <IconButton
+                      onClick={() => {
+                        setDisplay(!display);
+                      }}
+                    >
+                      {!display ? (
+                        <MenuIcon
+                          fontSize="large"
+                          sx={{
+                            padding: "0 !important",
+                            color: colors.primary[500],
+                            transition: "1s",
+                          }}
+                        />
+                      ) : (
+                        <CloseIcon
+                          fontSize="large"
+                          sx={{
+                            padding: "0 !important",
+                            color: colors.primary[500],
+                          }}
+                        />
+                      )}
+                    </IconButton>
+                  )}
                 </Box>
               ) : null}
               {/* Profile dropdown */}
@@ -156,16 +165,81 @@ export default function Navbar() {
                   borderBottomRightRadius: "5px",
                 }}
                 backgroundColor={colors.white[500]}
+                width={isNonMobile ? null : "200px"}
               >
                 <Collapse in={display} sx={{ borderRadius: "5px" }}>
-                  <List sx={{ m: "10px", borderRadius: "5px" }}>
+                  <List
+                    sx={{
+                      m: "10px",
+                      borderRadius: "5px",
+                      display: "flex",
+                      flexDirection: `${isNonMobile ? null : "column"}`,
+                      justifyContent: `${isNonMobile ? null : "center"}`,
+                    }}
+                  >
+                    {isNonMobile ? null : (
+                      <>
+                        <ListItem disablePadding>
+                          <ListItemButton
+                            // selected={activeTab.name === "home"}
+                            onClick={() => {
+                              setGlobalContext("home");
+                              setDisplay(!display);
+                            }}
+                            sx={{
+                              textAlign: "center",
+                              "&.Mui-selected": {
+                                boxShadow: "inset 0 0 5px black",
+                              },
+                            }}
+                          >
+                            <ListItemText primary="Home" />
+                          </ListItemButton>
+                        </ListItem>
+                        <ListItem disablePadding>
+                          <ListItemButton
+                            selected={activeTab.name === "usage"}
+                            onClick={() => {
+                              setGlobalContext("usage");
+                              setDisplay(!display);
+                            }}
+                            sx={{
+                              textAlign: "center",
+                              "&.Mui-selected": {
+                                boxShadow: "inset 0 0 5px black",
+                              },
+                            }}
+                          >
+                            <ListItemText primary="Usage" />
+                          </ListItemButton>
+                        </ListItem>
+                        <ListItem disablePadding>
+                          <ListItemButton
+                            selected={activeTab.name === "settings"}
+                            onClick={() => {
+                              setGlobalContext("settings");
+                              setDisplay(!display);
+                            }}
+                            sx={{
+                              textAlign: "center",
+                              "&.Mui-selected": {
+                                boxShadow: "inset 0 0 5px black",
+                              },
+                            }}
+                          >
+                            <ListItemText primary="Settings" />
+                          </ListItemButton>
+                        </ListItem>
+                      </>
+                    )}
                     <Button
                       variant="contained"
                       sx={{
                         gridColumn: isNonMobile ? undefined : "span 2",
                         fontSize: "11px",
-                        height: isNonMobile ? "35px" : undefined,
+                        height: isNonMobile ? "35px" : "45px",
                         backgroundColor: `${colors.primary[500]} !important`,
+                        mt: isNonMobile ? null : "10px",
                         "&:hover": {
                           backgroundColor: `${colors.orangeAccent[500]} !important`,
                           transition: "0.3s",
