@@ -1,5 +1,6 @@
 import { Box, Button, Link, Typography, useMediaQuery } from "@mui/material";
 import React from "react";
+import Profile from "./Profile";
 
 const Settings = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -16,74 +17,7 @@ const Settings = () => {
         </Box>
       </Box>
       {/*Content*/}
-      <Box
-        boxShadow="0 0 5px black"
-        height="fit-content"
-        m={isNonMobile ? "30px 30px 0 30px" : "30px 60px 0 30px"}
-        borderRadius="5px"
-        gridColumn="1 / span 2"
-      >
-        <Box>
-          <Typography>FirstName LastName</Typography>
-          <Box>
-            <Typography>Account Number:</Typography>
-            <Typography>123456789</Typography>
-          </Box>
-        </Box>
-        <Box p="15px">
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            borderBottom="solid 1px"
-            mt="10px"
-          >
-            <Typography>Full Name</Typography>
-            <Box display="flex">
-              <Typography>FirstName LastName</Typography>
-              <Link
-                ml="10px"
-                sx={{
-                  "&.MuiLink-root": {
-                    cursor: "pointer",
-                  },
-                }}
-              >
-                Edit
-              </Link>
-            </Box>
-          </Box>
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            borderBottom="solid 1px"
-            mt="10px"
-          >
-            <Typography>Email</Typography>
-            <Box display="flex">
-              <Typography>blah.com</Typography>
-              <Link
-                ml="10px"
-                sx={{
-                  "&.MuiLink-root": {
-                    cursor: "pointer",
-                  },
-                }}
-              >
-                Edit
-              </Link>
-            </Box>
-          </Box>
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            borderBottom="solid 1px"
-            mt="10px"
-          >
-            <Typography>Address</Typography>
-            <Typography>blah blah</Typography>
-          </Box>
-        </Box>
-      </Box>
+      <Profile />
     </Box>
   );
 };

@@ -58,7 +58,6 @@ export async function getAllUserData() {
 
 export async function updateUser(dict) {
   if (dict.uid) {
-    console.log(dict);
     await setDoc(doc(db, "users", dict.uid), {
       firstName: dict.firstName,
       lastName: dict.lastName,

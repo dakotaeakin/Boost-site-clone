@@ -8,6 +8,8 @@ import { UserContext } from "./context";
 export function useUserData() {
   const [user] = useAuthState(auth);
   const [firstName, setFirstName] = useState(null);
+  const [lastName, setLastName] = useState(null);
+  const [email, setEmail] = useState(null);
 
   // console.log(user);
   useEffect(() => {
@@ -17,6 +19,8 @@ export function useUserData() {
       const ref = doc(getFirestore(), "users", user.uid);
       unsubscribe = onSnapshot(ref, (doc) => {
         setFirstName(doc.data()?.firstName);
+        setLastName(doc.data()?.lastName);
+        setEmail(doc.data()?.email);
       });
     } else {
       setFirstName(null);
@@ -24,7 +28,7 @@ export function useUserData() {
 
     return unsubscribe;
   }, [user]);
-  return { user, firstName };
+  return { user, firstName, lastName, email };
 }
 
 export function classNames(...classes) {

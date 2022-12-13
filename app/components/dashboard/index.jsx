@@ -10,10 +10,11 @@ import React, { useContext, useEffect, useState } from "react";
 import Home from "./home/Home";
 import Settings from "../../components/dashboard/settings/Settings";
 import Usage from "../../components/dashboard/usage/Usage";
-import { GlobalContext } from "../../lib/context";
+import { GlobalContext, UserContext } from "../../lib/context";
 
 const Dashboard = (billData) => {
   const { globalData, setGlobalContext } = useContext(GlobalContext);
+  const userData = useContext(UserContext);
 
   const tabs = {
     home: { component: <Home billData={billData.billData} />, name: "home" },
