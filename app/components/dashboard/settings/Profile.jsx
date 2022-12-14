@@ -8,11 +8,11 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { UserContext } from "../../../lib/context";
+import { GlobalContext, UserContext } from "../../../lib/context";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { tokens } from "../../../theme";
-import { updateUser } from "../../../lib/firebase";
+import { deleteAccount, updateUser } from "../../../lib/firebase";
 
 const Profile = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -21,6 +21,7 @@ const Profile = () => {
   const [isError, setIsError] = useState();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const { globalData, setGlobalContext } = useContext(GlobalContext);
 
   const initialValues = {
     firstName: userData.firstName,
@@ -113,274 +114,283 @@ const Profile = () => {
     }
   };
 
+  const handleDeleteButton = () => {
+    localStorage.setItem("tab", "settings");
+
+    deleteAccount(userData.user);
+  };
+
   return (
-    <Box
-      boxShadow="0 0 5px black"
-      height="fit-content"
-      m={isNonMobile ? "30px 30px 0 30px" : "30px 60px 0 30px"}
-      borderRadius="5px"
-      gridColumn="1 / span 2"
-    >
-      <Box p="15px 15px 0 15px" display="flex" justifyContent="space-between">
-        <Typography variant="h3">
-          {userData.firstName} {userData.lastName}
-        </Typography>
-        <Box
-          height="100%"
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Typography variant="h5">Account Number:</Typography>
-          <Typography variant="h4">123456789</Typography>
-        </Box>
-      </Box>
-      <Box p="15px">
-        <Box borderBottom="solid 1px" pb="10px" mt="10px">
-          <Box display="flex" justifyContent="space-between">
-            <Typography>Full Name</Typography>
-            <Box display="flex">
-              <Typography pr="30px">
-                {userData.firstName} {userData.lastName}
-              </Typography>
-              <Link
-                underline="none"
-                ml="10px"
-                sx={{
-                  "&.MuiLink-root": {
-                    cursor: "pointer",
-                  },
-                }}
-                onClick={() =>
-                  setEdit((prev) => {
-                    return {
-                      name: !prev.name,
-                    };
-                  })
-                }
-              >
-                {edit.name ? (
-                  <Typography color="blue" sx={{ userSelect: "none" }}>
-                    Cancel
-                  </Typography>
-                ) : (
-                  <Typography color="blue" sx={{ userSelect: "none" }}>
-                    Edit
-                  </Typography>
-                )}
-              </Link>
-            </Box>
+    <Box>
+      <Box
+        boxShadow="0 0 5px black"
+        height="fit-content"
+        m={isNonMobile ? "30px 30px 0 30px" : "30px 60px 0 30px"}
+        borderRadius="5px"
+        gridColumn="1 / span 2"
+      >
+        <Box p="15px 15px 0 15px" display="flex" justifyContent="space-between">
+          <Typography variant="h3">
+            {userData.firstName} {userData.lastName}
+          </Typography>
+          <Box
+            height="100%"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Typography variant="h5">Account Number:</Typography>
+            <Typography variant="h4">123456789</Typography>
           </Box>
-          {edit.name ? (
-            <Formik
-              onSubmit={handleFormSubmit}
-              initialValues={initialValues}
-              validationSchema={loginSchema}
-            >
-              {({
-                values,
-                errors,
-                touched,
-                handleBlur,
-                handleChange,
-                handleSubmit,
-              }) => (
-                <form onSubmit={handleSubmit}>
-                  <Box
-                    m="50px"
-                    width="20vw"
-                    maxWidth="300px"
-                    minWidth="200px"
-                    display="grid"
-                    gap="30px"
-                    gridTemplateColumns="repeat(2, minmax(0, 1fr))"
-                    sx={{
-                      "& > div": { gridColumn: "span 2" },
-                    }}
-                  >
-                    {isError ? (
-                      <Typography
-                        variant="h6"
-                        sx={{
-                          gridColumn: "span 2",
-                          color: "#f44336",
-                          textAlign: "center",
-                        }}
-                      >
-                        {isError}
-                      </Typography>
-                    ) : undefined}
-                    <TextField
-                      fullWidth
-                      variant="outlined"
-                      type="text"
-                      label="First Name"
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      value={values.firstName}
-                      name="firstName"
-                      error={!!touched.firstName && !!errors.firstName}
-                      helperText={
-                        touched.firstName && errors.firstName ? "Required" : ""
-                      }
+        </Box>
+        <Box p="15px">
+          <Box borderBottom="solid 1px" pb="10px" mt="10px">
+            <Box display="flex" justifyContent="space-between">
+              <Typography>Full Name</Typography>
+              <Box display="flex">
+                <Typography pr="30px">
+                  {userData.firstName} {userData.lastName}
+                </Typography>
+                <Link
+                  underline="none"
+                  ml="10px"
+                  sx={{
+                    "&.MuiLink-root": {
+                      cursor: "pointer",
+                    },
+                  }}
+                  onClick={() =>
+                    setEdit((prev) => {
+                      return {
+                        name: !prev.name,
+                      };
+                    })
+                  }
+                >
+                  {edit.name ? (
+                    <Typography color="blue" sx={{ userSelect: "none" }}>
+                      Cancel
+                    </Typography>
+                  ) : (
+                    <Typography color="blue" sx={{ userSelect: "none" }}>
+                      Edit
+                    </Typography>
+                  )}
+                </Link>
+              </Box>
+            </Box>
+            {edit.name ? (
+              <Formik
+                onSubmit={handleFormSubmit}
+                initialValues={initialValues}
+                validationSchema={loginSchema}
+              >
+                {({
+                  values,
+                  errors,
+                  touched,
+                  handleBlur,
+                  handleChange,
+                  handleSubmit,
+                }) => (
+                  <form onSubmit={handleSubmit}>
+                    <Box
+                      m="50px"
+                      width="20vw"
+                      maxWidth="300px"
+                      minWidth="200px"
+                      display="grid"
+                      gap="30px"
+                      gridTemplateColumns="repeat(2, minmax(0, 1fr))"
                       sx={{
-                        ...textFieldStyle,
-                        gridColumn: "span 1 !important",
-                      }}
-                    />
-                    <TextField
-                      fullWidth
-                      variant="outlined"
-                      type="text"
-                      label="Last Name"
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      value={values.lastName}
-                      name="lastName"
-                      error={!!touched.lastName && !!errors.lastName}
-                      helperText={
-                        touched.lastName && errors.lastName ? "Required" : ""
-                      }
-                      sx={{
-                        ...textFieldStyle,
-                        gridColumn: "span 1 !important",
-                      }}
-                    />
-
-                    <Button
-                      type="submit"
-                      variant="contained"
-                      sx={{
-                        backgroundColor: `${colors.primary[500]} !important`,
-                        gridColumn: isNonMobile ? "2" : "span 2",
-                        height: isNonMobile ? "35px" : undefined,
-                        fontSize: "11px",
-                        "&:hover": {
-                          backgroundColor: `${colors.orangeAccent[500]} !important`,
-                        },
+                        "& > div": { gridColumn: "span 2" },
                       }}
                     >
-                      Submit
-                    </Button>
-                  </Box>
-                </form>
-              )}
-            </Formik>
-          ) : null}
-        </Box>
-        <Box pb="10px" mt="10px">
-          <Box display="flex" justifyContent="space-between">
-            <Typography>Email</Typography>
-            <Box display="flex">
-              <Typography pr="30px">{userData.email}</Typography>
-              <Link
-                underline="none"
-                ml="10px"
-                sx={{
-                  "&.MuiLink-root": {
-                    cursor: "pointer",
-                  },
-                }}
-                onClick={() =>
-                  setEdit((prev) => {
-                    return {
-                      email: !prev.email,
-                    };
-                  })
-                }
-              >
-                {edit.email ? (
-                  <Typography color="blue" sx={{ userSelect: "none" }}>
-                    Cancel
-                  </Typography>
-                ) : (
-                  <Typography color="blue" sx={{ userSelect: "none" }}>
-                    Edit
-                  </Typography>
-                )}
-              </Link>
-            </Box>
-          </Box>
-          {edit.email ? (
-            <Formik
-              onSubmit={handleFormSubmit}
-              initialValues={initialValues}
-              validationSchema={loginSchema}
-            >
-              {({
-                values,
-                errors,
-                touched,
-                handleBlur,
-                handleChange,
-                handleSubmit,
-              }) => (
-                <form onSubmit={handleSubmit}>
-                  <Box
-                    m="50px"
-                    width="20vw"
-                    maxWidth="300px"
-                    minWidth="200px"
-                    display="grid"
-                    gap="30px"
-                    gridTemplateColumns="repeat(2, minmax(0, 1fr))"
-                    sx={{
-                      "& > div": { gridColumn: "span 2" },
-                    }}
-                  >
-                    {isError ? (
-                      <Typography
-                        variant="h6"
+                      {isError ? (
+                        <Typography
+                          variant="h6"
+                          sx={{
+                            gridColumn: "span 2",
+                            color: "#f44336",
+                            textAlign: "center",
+                          }}
+                        >
+                          {isError}
+                        </Typography>
+                      ) : undefined}
+                      <TextField
+                        fullWidth
+                        variant="outlined"
+                        type="text"
+                        label="First Name"
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        value={values.firstName}
+                        name="firstName"
+                        error={!!touched.firstName && !!errors.firstName}
+                        helperText={
+                          touched.firstName && errors.firstName
+                            ? "Required"
+                            : ""
+                        }
                         sx={{
-                          gridColumn: "span 2",
-                          color: "#f44336",
-                          textAlign: "center",
+                          ...textFieldStyle,
+                          gridColumn: "span 1 !important",
+                        }}
+                      />
+                      <TextField
+                        fullWidth
+                        variant="outlined"
+                        type="text"
+                        label="Last Name"
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        value={values.lastName}
+                        name="lastName"
+                        error={!!touched.lastName && !!errors.lastName}
+                        helperText={
+                          touched.lastName && errors.lastName ? "Required" : ""
+                        }
+                        sx={{
+                          ...textFieldStyle,
+                          gridColumn: "span 1 !important",
+                        }}
+                      />
+
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        sx={{
+                          backgroundColor: `${colors.primary[500]} !important`,
+                          gridColumn: isNonMobile ? "2" : "span 2",
+                          height: isNonMobile ? "35px" : undefined,
+                          fontSize: "11px",
+                          "&:hover": {
+                            backgroundColor: `${colors.orangeAccent[500]} !important`,
+                          },
                         }}
                       >
-                        {isError}
-                      </Typography>
-                    ) : undefined}
-                    <TextField
-                      fullWidth
-                      variant="outlined"
-                      type="text"
-                      label="Email"
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      value={values.email}
-                      name="email"
-                      error={!!touched.email && !!errors.email}
-                      helperText={
-                        touched.email && errors.email ? "Required" : ""
-                      }
+                        Submit
+                      </Button>
+                    </Box>
+                  </form>
+                )}
+              </Formik>
+            ) : null}
+          </Box>
+          <Box pb="10px" mt="10px">
+            <Box display="flex" justifyContent="space-between">
+              <Typography>Email</Typography>
+              <Box display="flex">
+                <Typography pr="30px">{userData.email}</Typography>
+                <Link
+                  underline="none"
+                  ml="10px"
+                  sx={{
+                    "&.MuiLink-root": {
+                      cursor: "pointer",
+                    },
+                  }}
+                  onClick={() =>
+                    setEdit((prev) => {
+                      return {
+                        email: !prev.email,
+                      };
+                    })
+                  }
+                >
+                  {edit.email ? (
+                    <Typography color="blue" sx={{ userSelect: "none" }}>
+                      Cancel
+                    </Typography>
+                  ) : (
+                    <Typography color="blue" sx={{ userSelect: "none" }}>
+                      Edit
+                    </Typography>
+                  )}
+                </Link>
+              </Box>
+            </Box>
+            {edit.email ? (
+              <Formik
+                onSubmit={handleFormSubmit}
+                initialValues={initialValues}
+                validationSchema={loginSchema}
+              >
+                {({
+                  values,
+                  errors,
+                  touched,
+                  handleBlur,
+                  handleChange,
+                  handleSubmit,
+                }) => (
+                  <form onSubmit={handleSubmit}>
+                    <Box
+                      m="50px"
+                      width="20vw"
+                      maxWidth="300px"
+                      minWidth="200px"
+                      display="grid"
+                      gap="30px"
+                      gridTemplateColumns="repeat(2, minmax(0, 1fr))"
                       sx={{
-                        ...textFieldStyle,
-                        gridColumn: "span 2 !important",
-                      }}
-                    />
-
-                    <Button
-                      type="submit"
-                      variant="contained"
-                      sx={{
-                        backgroundColor: `${colors.primary[500]} !important`,
-                        gridColumn: isNonMobile ? "2" : "span 2",
-                        height: isNonMobile ? "35px" : undefined,
-                        fontSize: "11px",
-                        "&:hover": {
-                          backgroundColor: `${colors.orangeAccent[500]} !important`,
-                        },
+                        "& > div": { gridColumn: "span 2" },
                       }}
                     >
-                      Submit
-                    </Button>
-                  </Box>
-                </form>
-              )}
-            </Formik>
-          ) : null}
-        </Box>
-        {/* <Box
+                      {isError ? (
+                        <Typography
+                          variant="h6"
+                          sx={{
+                            gridColumn: "span 2",
+                            color: "#f44336",
+                            textAlign: "center",
+                          }}
+                        >
+                          {isError}
+                        </Typography>
+                      ) : undefined}
+                      <TextField
+                        fullWidth
+                        variant="outlined"
+                        type="text"
+                        label="Email"
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                        value={values.email}
+                        name="email"
+                        error={!!touched.email && !!errors.email}
+                        helperText={
+                          touched.email && errors.email ? "Required" : ""
+                        }
+                        sx={{
+                          ...textFieldStyle,
+                          gridColumn: "span 2 !important",
+                        }}
+                      />
+
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        sx={{
+                          backgroundColor: `${colors.primary[500]} !important`,
+                          gridColumn: isNonMobile ? "2" : "span 2",
+                          height: isNonMobile ? "35px" : undefined,
+                          fontSize: "11px",
+                          "&:hover": {
+                            backgroundColor: `${colors.orangeAccent[500]} !important`,
+                          },
+                        }}
+                      >
+                        Submit
+                      </Button>
+                    </Box>
+                  </form>
+                )}
+              </Formik>
+            ) : null}
+          </Box>
+          {/* <Box
           display="flex"
           justifyContent="space-between"
           borderBottom="solid 1px"
@@ -390,6 +400,21 @@ const Profile = () => {
           <Typography>Address</Typography>
           <Typography>blah blah</Typography>
         </Box> */}
+        </Box>
+      </Box>
+      <Box display="flex" justifyContent="flex-end" m="30px">
+        <Button
+          onClick={handleDeleteButton}
+          type=""
+          variant="outlined"
+          sx={{
+            gridColumn: isNonMobile ? "2" : "span 2",
+            height: isNonMobile ? "35px" : undefined,
+            fontSize: "11px",
+          }}
+        >
+          Delete Account
+        </Button>
       </Box>
     </Box>
   );

@@ -38,8 +38,15 @@ const Dashboard = (billData) => {
   };
 
   useEffect(() => {
+    if (localStorage.getItem("tab")) {
+      setGlobalContext("settings");
+      localStorage.removeItem("tab");
+    }
+  }, []);
+
+  useEffect(() => {
     handleTab(globalData.dashboard.activeTab);
-    console.log(activeTab);
+    console.log("hello", activeTab);
   }, [globalData.dashboard.activeTab]);
 
   return (

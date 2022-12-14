@@ -1,4 +1,10 @@
-import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  setDoc,
+} from "firebase/firestore";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
@@ -6,6 +12,8 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  deleteUser,
+  signOut,
 } from "firebase/auth";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -63,6 +71,24 @@ export async function updateUser(dict) {
       lastName: dict.lastName,
       email: dict.email,
     });
+  } else {
+    console.log("no uid");
+  }
+}
+
+export async function deleteAccount(dict) {
+  console.log(dict);
+  if (dict.uid) {
+    deleteUser(auth.currentUser)
+      .then(() => {
+        console.log("user deleted");
+        localStorage.removeItem("tab");
+      })
+      .catch((e) => {
+        console.log("An error occured:", e);
+        signOut(auth);
+      });
+    await deleteDoc(doc(db, "users", dict.uid));
   } else {
     console.log("no uid");
   }
