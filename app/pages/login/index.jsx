@@ -4,7 +4,7 @@ import { updateUser } from "../../lib/firebase";
 import Router, { useRouter } from "next/router";
 import { useUserData } from "../../lib/hooks";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { UserContext } from "../../lib/context";
+import { GlobalContext, UserContext } from "../../lib/context";
 import {
   Box,
   Button,
@@ -25,6 +25,7 @@ import Link from "next/link";
 
 const Login = () => {
   const context = useContext(UserContext);
+  const { globalData, setGlobalContext } = useContext(GlobalContext);
 
   useEffect(() => {
     if (context.user) {

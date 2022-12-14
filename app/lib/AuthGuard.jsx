@@ -23,7 +23,7 @@ export function AuthGuard({ children }) {
     }
   }, [router, user, loading]);
 
-  console.log(user);
+  // console.log(user);
   // if auth initialized with a valid user show protected page
   if (!loading && user) {
     return <>{children}</>;

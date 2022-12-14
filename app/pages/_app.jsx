@@ -19,6 +19,7 @@ function MyApp({ Component, pageProps }) {
   });
   const setGlobalContext = (tab) =>
     setGlobalData((prev) => {
+      console.log(tab);
       return { dashboard: { activeTab: tab } };
     });
   return (

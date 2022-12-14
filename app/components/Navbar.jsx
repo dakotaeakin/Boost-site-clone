@@ -43,6 +43,7 @@ export default function Navbar(billData) {
 
   const { globalData, setGlobalContext } = useContext(GlobalContext);
 
+  console.log(globalData);
   return (
     <Box
       display="flex"
